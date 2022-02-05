@@ -14,24 +14,25 @@ const ArrowIcon = () => (
     style={styles.headerIcon}
   />
 );
-const Page = ({effect, children, onBack}) => {
+const Page = ({effect, children, onBack, title}) => {
+  let effectNode = null;
+  if (effect)
+    effectNode = (
+      <AbsoluteView top={-130} right={-70}>
+        <Image
+          source={require("../assets/effect.png")}
+          style={styles.effectImage}
+        />
+      </AbsoluteView>
+    );
   return (
-    <View style={{backgroundColor: colors.black, flex: 1}}>
-      {effect && (
-        <>
-          <AbsoluteView top={-130} right={-70}>
-            <Image
-              source={require("../assets/effect.png")}
-              style={styles.effectImage}
-            />
-          </AbsoluteView>
-        </>
-      )}
+    <View style={styles.container}>
+      {effectNode}
       <View style={styles.header}>
         <TouchableOpacity onPress={onBack}>
           <ArrowIcon />
         </TouchableOpacity>
-        <StyledText style={styles.headerText}>تسجيل الدخول</StyledText>
+        <StyledText style={styles.headerText}>{title}</StyledText>
         <Spacer space={40} />
       </View>
       {children}
@@ -40,6 +41,10 @@ const Page = ({effect, children, onBack}) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.black,
+    flex: 1,
+  },
   header: {
     height: 64,
     alignItems: "center",
