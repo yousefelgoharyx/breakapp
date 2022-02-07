@@ -6,17 +6,18 @@ import {launchImageLibrary} from "react-native-image-picker";
 
 const SIZE = 150;
 
-const ImageUpload = () => {
+const ImageUpload = ({onImageChange}) => {
   const [image, setImage] = useState(null);
   const handleImageUpload = async () => {
     try {
       const result = await launchImageLibrary({
         mediaType: "photo",
       });
+      if (result?.didCancel) return;
       setImage(result.assets);
-      console.log(result.assets);
+      onImageChange(result.assets);
     } catch (e) {
-      Alert.alert("Can't open image library", e.toString(), [
+      Alert.alert("Can't open image library", [
         {text: "OK", onPress: () => console.log("OK Pressed")},
       ]);
     }
@@ -25,16 +26,7 @@ const ImageUpload = () => {
     <View style={styles.wrapper}>
       <Pressable onPress={handleImageUpload}>
         {image ? (
-          <Image
-            source={{uri: image[0].uri, isStatic: true}}
-            style={{
-              width: SIZE,
-              height: SIZE,
-              borderColor: colors.darkPrimary,
-              borderWidth: 1,
-              borderRadius: SIZE / 2,
-            }}
-          />
+          <Image source={{uri: image[0].uri}} style={styles.image} />
         ) : (
           <View style={styles.box}>
             <Icon name="camera-alt" size={32} style={styles.icon} />
@@ -63,6 +55,13 @@ const styles = StyleSheet.create({
     transform: [{rotate: "45deg"}],
   },
   icon: {transform: [{rotate: "-45deg"}]},
+  image: {
+    width: SIZE,
+    height: SIZE,
+    borderColor: colors.darkPrimary,
+    borderWidth: 1,
+    borderRadius: SIZE / 2,
+  },
 });
 
 export default ImageUpload;

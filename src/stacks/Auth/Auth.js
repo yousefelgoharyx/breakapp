@@ -1,11 +1,11 @@
 import React from "react";
 import {Image, SafeAreaView, StyleSheet, View} from "react-native";
-import AbsoluteView from "../components/AbsoluteView";
-import DoublePolygen from "../components/DoublePolygen";
-import SocialButton from "../components/SocialButton";
-import Spacer from "../components/Spacer";
-import StyledText from "../components/StyledText";
-import colors from "../utils/colors";
+import AbsoluteView from "../../components/AbsoluteView";
+import DoublePolygen from "../../components/DoublePolygen";
+import SocialButton from "../../components/SocialButton";
+import Spacer from "../../components/Spacer";
+import StyledText from "../../components/StyledText";
+import colors from "../../utils/colors";
 const Auth = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
@@ -38,7 +38,7 @@ const Auth = ({navigation}) => {
           كون ذاتك
         </StyledText>
         <Image
-          source={require("../assets/head.png")}
+          source={require("../../assets/head.png")}
           style={{width: 324, height: 350}}
         />
       </View>

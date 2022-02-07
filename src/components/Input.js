@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     height: 48,
     flexDirection: "row",
+    marginBottom: 24,
   },
   input: {
     textAlign: "right",
