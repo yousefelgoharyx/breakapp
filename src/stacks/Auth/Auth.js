@@ -1,5 +1,12 @@
 import React from "react";
-import {Image, SafeAreaView, StyleSheet, View} from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  useWindowDimensions,
+  Dimensions,
+  StyleSheet,
+  View,
+} from "react-native";
 import AbsoluteView from "../../components/AbsoluteView";
 import DoublePolygen from "../../components/DoublePolygen";
 import SocialButton from "../../components/SocialButton";
@@ -7,6 +14,7 @@ import Spacer from "../../components/Spacer";
 import StyledText from "../../components/StyledText";
 import colors from "../../utils/colors";
 const Auth = ({navigation}) => {
+  const {width, height} = Dimensions.get("window");
   return (
     <SafeAreaView style={styles.container}>
       <AbsoluteView top="8%" right={56}>
@@ -16,30 +24,17 @@ const Auth = ({navigation}) => {
         <DoublePolygen />
       </AbsoluteView>
 
-      <View style={{alignItems: "center", marginTop: 32, position: "relative"}}>
-        <StyledText
-          size={22}
-          style={{position: "absolute", top: "46%", left: 48}}>
-          دردشة
-        </StyledText>
-        <StyledText
-          size={14}
-          style={{position: "absolute", top: 40, right: "42%"}}>
-          اصدقاء جدد
-        </StyledText>
-        <StyledText
-          size={14}
-          style={{position: "absolute", bottom: 32, left: "39%"}}>
-          مواهب جديدة
-        </StyledText>
-        <StyledText
-          size={22}
-          style={{position: "absolute", bottom: "46%", right: 32}}>
-          كون ذاتك
-        </StyledText>
+      <View
+        style={{
+          alignItems: "center",
+          marginTop: 32,
+          height: height * 0.45,
+          width: width,
+        }}>
         <Image
+          resizeMode="contain"
           source={require("../../assets/head.png")}
-          style={{width: 324, height: 350}}
+          style={{flex: 1}}
         />
       </View>
       <View style={styles.social}>
