@@ -7,6 +7,8 @@ import CreateGroup from "./src/stacks/Auth/CreateGroup";
 import ForgotPassword from "./src/stacks/Auth/ForgotPassword";
 import Login from "./src/stacks/Auth/Login";
 import Home from "./src/stacks/Home/Home";
+import {LogBox} from "react-native";
+import Main from "./src/stacks/Home/Main";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -19,6 +21,10 @@ const theme = {
   },
 };
 
+LogBox.ignoreLogs([
+  "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
+]);
+
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
@@ -27,7 +33,7 @@ const App = () => {
         <AppStack.Screen name="Login" component={Login} />
         <AppStack.Screen name="ForgotPassword" component={ForgotPassword} />
         <AppStack.Screen name="CreateGroup" component={CreateGroup} />
-        <AppStack.Screen name="Home" component={Home} />
+        <AppStack.Screen name="MainTabs" component={Main} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

@@ -7,7 +7,7 @@ import Page from "../../components/Page";
 import Spacer from "../../components/Spacer";
 
 const CreateGroup = ({navigation}) => {
-  const toHome = () => navigation.navigate("Home");
+  const ToMainTabs = () => navigation.navigate("MainTabs");
   return (
     <Page effect onBack={navigation.goBack} title="انشاء قبيلة">
       <AuthFlowView>
@@ -19,7 +19,7 @@ const CreateGroup = ({navigation}) => {
         <Input placeholder="الجنس" />
         <Input placeholder="كلمة المرور" isSecure />
         <Input placeholder="اكتب عنك" isSecure />
-        <Button onPress={toHome} title="انشاء" />
+        <Button onPress={ToMainTabs} title="انشاء" />
       </AuthFlowView>
     </Page>
   );
