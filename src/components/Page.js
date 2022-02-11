@@ -1,19 +1,9 @@
 import React from "react";
-import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import {Image, StyleSheet, View} from "react-native";
 import colors from "../utils/colors";
 import AbsoluteView from "./AbsoluteView";
-import Spacer from "./Spacer";
-import StyledText from "./StyledText";
+import AppBar from "./AppBar";
 
-const ArrowIcon = () => (
-  <Icon
-    name="arrow-forward-outline"
-    size={24}
-    color={"#fff"}
-    style={styles.headerIcon}
-  />
-);
 const Page = ({effect, children, onBack, title}) => {
   let effectNode = null;
   if (effect)
@@ -28,13 +18,7 @@ const Page = ({effect, children, onBack, title}) => {
   return (
     <View style={styles.container}>
       {effectNode}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={onBack}>
-          <ArrowIcon />
-        </TouchableOpacity>
-        <StyledText style={styles.headerText}>{title}</StyledText>
-        <Spacer space={40} />
-      </View>
+      <AppBar title={title} onBack={onBack} />
       {children}
     </View>
   );
@@ -45,18 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
     flex: 1,
   },
-  header: {
-    height: 64,
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
-  headerIcon: {
-    marginStart: 16,
-  },
-  headerText: {
-    lineHeight: 16 * 1.6,
-  },
+
   effectImage: {
     width: 256,
     height: 256,

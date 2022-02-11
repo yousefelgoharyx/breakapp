@@ -1,14 +1,18 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React from "react";
+import {StyleSheet, Text} from "react-native";
 
 const StyledText = ({children, size = 16, style, ...rest}) => {
+  let styles = {...style};
+  if (Array.isArray(style)) {
+    styles = StyleSheet.flatten(style);
+  }
   return (
     <Text
       style={{
-        color: '#fff',
-        fontFamily: 'Cairo',
+        color: "#fff",
+        fontFamily: "Cairo",
         fontSize: size,
-        ...style,
+        ...styles,
       }}
       {...rest}>
       {children}

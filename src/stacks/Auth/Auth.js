@@ -13,6 +13,8 @@ import SocialButton from "../../components/SocialButton";
 import Spacer from "../../components/Spacer";
 import StyledText from "../../components/StyledText";
 import colors from "../../utils/colors";
+
+const headImage = require("../../assets/auth/head.png");
 const Auth = ({navigation}) => {
   const {width, height} = Dimensions.get("window");
   return (
@@ -31,11 +33,7 @@ const Auth = ({navigation}) => {
           height: height * 0.45,
           width: width,
         }}>
-        <Image
-          resizeMode="contain"
-          source={require("../../assets/head.png")}
-          style={{flex: 1}}
-        />
+        <Image resizeMode="contain" source={headImage} style={{flex: 1}} />
       </View>
       <View style={styles.social}>
         <StyledText size={12}>
