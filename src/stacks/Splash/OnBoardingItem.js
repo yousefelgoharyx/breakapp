@@ -7,7 +7,9 @@ const OnBoardingItem = ({title, subtitle, source}) => {
     <View style={[styles.container, {width}]}>
       <Image source={source} style={[styles.image, {width: width - 64}]} />
       <View style={styles.info}>
-        <StyledText style={styles.title}>{title}</StyledText>
+        <StyledText bold style={styles.title}>
+          {title}
+        </StyledText>
         <StyledText style={styles.subtitle}>{subtitle}</StyledText>
       </View>
     </View>

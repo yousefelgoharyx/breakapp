@@ -15,8 +15,10 @@ const RankedGroup = ({children, high}) => {
       {children}
       <ImageBackground
         source={high ? highRank : lowRank}
-        style={[styles.image, {height: high ? 160 : 140}]}>
-        <StyledText size={14}>قبيلة الشمال</StyledText>
+        style={[styles.image, {height: high ? 170 : 150}]}>
+        <StyledText size={14} bold style={{marginBottom: 8}}>
+          قبيلة الشمال
+        </StyledText>
 
         <StyledText size={12}>ID 32652</StyledText>
         <View

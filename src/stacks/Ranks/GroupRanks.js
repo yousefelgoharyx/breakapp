@@ -15,7 +15,7 @@ import RankedGroup from "../../components/RankedGroup";
 
 const personImage = require("../../assets/person.png");
 
-const GroupRanks = () => {
+const GroupRanks = ({navigation}) => {
   const [activeTabId, setActiveTabId] = useState(tabs[0].id);
   useEffect(() => {
     console.log(activeTabId);
@@ -23,7 +23,7 @@ const GroupRanks = () => {
 
   return (
     <Screen bg={colors.black} statusBarBg={colors.black}>
-      <AppBar title="ترتيب القبائل" />
+      <AppBar title="ترتيب القبائل" onBack={navigation.goBack} />
       <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} />
 
       <View style={styles.topStarsContainer}>

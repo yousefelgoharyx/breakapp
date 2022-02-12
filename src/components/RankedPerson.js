@@ -13,7 +13,7 @@ const RankedPerson = ({name, id, amount, children, top = 0}) => {
         </StyledText>
         <View style={styles.jewelContainer}>
           <Image source={jewelIcon} style={styles.jewelIcon} />
-          <StyledText size={12} style={styles.jewelAmount}>
+          <StyledText bold size={12} style={styles.jewelAmount}>
             {amount}
           </StyledText>
         </View>

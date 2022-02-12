@@ -11,7 +11,7 @@ const ProfileHeader = () => {
         <Image source={profileImage} style={styles.image} />
       </View>
       <View style={styles.infoWrapper}>
-        <StyledText>Sherif Ashraf</StyledText>
+        <StyledText bold>Sherif Ashraf</StyledText>
         <View style={styles.idWrapper}>
           <Image source={idIcon} style={styles.idIcon} />
           <StyledText size={14} style={styles.idText}>
