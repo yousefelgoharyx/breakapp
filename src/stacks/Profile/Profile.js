@@ -18,9 +18,10 @@ const walletIcon = require("../../assets/profile/wallet.png");
 const awardIcon = require("../../assets/profile/award.png");
 const inviteIcon = require("../../assets/profile/invite.png");
 const settingsIcon = require("../../assets/profile/settings.png");
+
 const Profile = () => {
   return (
-    <Screen bg="#262626">
+    <Screen bg="#262626" statusBarBg="#262626">
       <AppBar title="الملف الشخصي" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProfileHeader />

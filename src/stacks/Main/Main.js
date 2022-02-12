@@ -40,6 +40,7 @@ const MyTabBar = ({state, descriptors, navigation}) => {
 const Main = () => {
   return (
     <Tabs.Navigator
+      animationEnabled={true}
       tabBar={props => <MyTabBar {...props} />}
       screenOptions={{headerShown: false}}>
       <Tabs.Screen

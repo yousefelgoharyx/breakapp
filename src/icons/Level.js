@@ -1,12 +1,12 @@
 import React from "react";
 import {Image, StyleSheet} from "react-native";
-const Heart = ({size = 24, style}) => {
+const Level = ({size = 24, style}) => {
   return (
     <Image
-      source={require("../assets/icons/like.png")}
+      source={require("../assets/icons/level.png")}
       style={{width: size, height: size, ...StyleSheet.flatten(style)}}
     />
   );
 };
 
-export default Heart;
+export default Level;

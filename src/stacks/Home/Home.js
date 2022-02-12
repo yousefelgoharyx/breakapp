@@ -30,14 +30,22 @@ const Home = ({navigation}) => {
           style={{width, height: width / 4, resizeMode: "cover"}}
         />
         <View style={styles.catsContainer}>
-          <HomeCat src={mobileImage} title="ترتيب الغرف" />
+          <HomeCat
+            src={mobileImage}
+            title="ترتيب الغرف"
+            onPress={() => navigation.navigate("GroupRanks")}
+          />
           <HomeCat
             src={starsImage}
             title="النجوم"
             onPress={() => navigation.navigate("Stars")}
           />
           <HomeCat src={TennisImage} title="الالعاب" />
-          <HomeCat src={CrownImage} title="الاثرياء" />
+          <HomeCat
+            src={CrownImage}
+            title="الاثرياء"
+            onPress={() => navigation.navigate("Rich")}
+          />
         </View>
         <HomeRow>
           <HomePerson />

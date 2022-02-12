@@ -13,14 +13,14 @@ import {people, tabs} from "./ranksData";
 
 const personImage = require("../../assets/person.png");
 
-const Stars = () => {
+const Rich = () => {
   const [activeTabId, setActiveTabId] = useState(tabs[0].id);
   useEffect(() => {
     console.log(activeTabId);
   }, [activeTabId]);
 
   return (
-    <Screen bg={colors.primary}>
+    <Screen bg={colors.black} statusBarBg={colors.black}>
       <Spacer space={32} />
       <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} />
 
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
 });
-export default Stars;
+export default Rich;

@@ -47,7 +47,12 @@ const Auth = ({navigation}) => {
           text="Facebook"
         />
         <Spacer />
-        <SocialButton icon="google" color="#000" text="Google" />
+        <SocialButton
+          icon="google"
+          color="#000"
+          text="Google"
+          onPress={() => navigation.navigate("Stars")}
+        />
         <Spacer space={20} />
         <SocialButton icon="mobile-alt" color="#000" text="Google" />
         <Spacer space={32} />

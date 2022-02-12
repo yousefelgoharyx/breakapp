@@ -1,43 +1,43 @@
 import React, {useEffect, useState} from "react";
-import {ScrollView, StyleSheet, View} from "react-native";
+import {ImageBackground, ScrollView, StyleSheet, View} from "react-native";
 import DarkFrame from "../../components/DarkFrame";
 import GoldFrame from "../../components/GoldFrame";
 import IceFrame from "../../components/IceFrame";
 import Person from "../../components/Person";
 import RankedPerson from "../../components/RankedPerson";
 import Screen from "../../components/Screen";
-import Spacer from "../../components/Spacer";
+import AppBar from "../../components/AppBar";
 import Tab from "../../components/Tab";
 import colors from "../../utils/colors";
 import {people, tabs} from "./ranksData";
+import StyledText from "../../components/StyledText";
+import RankedGroup from "../../components/RankedGroup";
 
 const personImage = require("../../assets/person.png");
 
-const Stars = () => {
+const GroupRanks = () => {
   const [activeTabId, setActiveTabId] = useState(tabs[0].id);
   useEffect(() => {
     console.log(activeTabId);
   }, [activeTabId]);
 
   return (
-    <Screen bg={colors.primary}>
-      <Spacer space={32} />
+    <Screen bg={colors.black} statusBarBg={colors.black}>
+      <AppBar title="ترتيب القبائل" />
       <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} />
 
       <View style={styles.topStarsContainer}>
-        <RankedPerson name="Sherif Ashraf" amount="225.13k" id="ID 3285224">
+        <RankedGroup>
           <IceFrame source={personImage} />
-        </RankedPerson>
-        <RankedPerson
-          name="Sherif Ashraf"
-          amount="225.13k"
-          id="ID 3285224"
-          top={-32}>
+        </RankedGroup>
+
+        <RankedGroup high>
           <GoldFrame source={personImage} />
-        </RankedPerson>
-        <RankedPerson name="Sherif Ashraf" amount="225.13k" id="ID 3285224">
+        </RankedGroup>
+
+        <RankedGroup>
           <DarkFrame source={personImage} />
-        </RankedPerson>
+        </RankedGroup>
       </View>
 
       <ScrollView
@@ -61,11 +61,10 @@ const Stars = () => {
 const styles = StyleSheet.create({
   topStarsContainer: {
     flexDirection: "row",
-    marginTop: 64,
+    marginTop: 32,
     justifyContent: "space-between",
     paddingHorizontal: 32,
     alignItems: "center",
-    marginBottom: 16,
   },
   scrollView: {
     flex: 1,
@@ -79,4 +78,4 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
 });
-export default Stars;
+export default GroupRanks;

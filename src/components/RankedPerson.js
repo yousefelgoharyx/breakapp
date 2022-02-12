@@ -1,7 +1,7 @@
 import React from "react";
 import {Image, StyleSheet, View} from "react-native";
 import StyledText from "./StyledText";
-const jewelIcon = require("../assets/jewels.png");
+const jewelIcon = require("../assets/icons/jewels.png");
 const RankedPerson = ({name, id, amount, children, top = 0}) => {
   return (
     <View style={[styles.container, {top}]}>
