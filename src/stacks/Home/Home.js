@@ -2,7 +2,6 @@ import React, {useLayoutEffect} from "react";
 import {
   Image,
   ScrollView,
-  StatusBar,
   StyleSheet,
   useWindowDimensions,
   View,
@@ -68,6 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 24,
     marginTop: 16,
+    flexWrap: "wrap",
   },
   row: {
     flexDirection: "row",

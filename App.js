@@ -1,5 +1,8 @@
 import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
-import {createStackNavigator} from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
 import React from "react";
 import {I18nManager, StatusBar, LogBox} from "react-native";
 import Auth from "./src/stacks/Auth/Auth";
@@ -28,8 +31,11 @@ LogBox.ignoreLogs([
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
-      <StatusBar backgroundColor="#000" />
-      <AppStack.Navigator screenOptions={{headerShown: false}}>
+      <AppStack.Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        }}>
         <AppStack.Screen name="OnBoarding" component={OnBoarding} />
         <AppStack.Screen name="Auth" component={Auth} />
         <AppStack.Screen name="Login" component={Login} />

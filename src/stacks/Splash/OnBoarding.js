@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {FlatList, StatusBar, StyleSheet, Animated, View} from "react-native";
+import {FlatList, Animated, View} from "react-native";
 import Screen from "../../components/Screen";
 import AbsoluteView from "../../components/AbsoluteView";
 import DoublePolygen from "../../components/DoublePolygen";
@@ -52,8 +52,7 @@ const OnBoarding = ({navigation}) => {
     }
   };
   return (
-    <Screen bg="#000">
-      <StatusBar backgroundColor="#000" />
+    <Screen bg="#000" statusBarBg="#000">
       <AbsoluteView top="5%" right={56}>
         <DoublePolygen />
       </AbsoluteView>
@@ -82,9 +81,9 @@ const OnBoarding = ({navigation}) => {
           onViewableItemsChanged={viewableItemsChanged}
           ref={stepsRef}
         />
-        <Paginator steps={steps} scrollX={scrollX} />
-        <OnBoardingButton onPress={scrollTo} />
       </View>
+      <Paginator steps={steps} scrollX={scrollX} />
+      <OnBoardingButton onPress={scrollTo} />
     </Screen>
   );
 };

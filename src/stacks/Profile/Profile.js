@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Image,
-  StatusBar,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import {StyleSheet, View, ScrollView} from "react-native";
 import AppBar from "../../components/AppBar";
 import Screen from "../../components/Screen";
 import Spacer from "../../components/Spacer";
@@ -14,8 +7,6 @@ import ProfileHeader from "./ProfileHeader";
 import ProfileBadge from "./ProfileBadge";
 import ProfileStat from "./ProfileStat";
 import Divider from "../../components/Divider";
-import StyledText from "../../components/StyledText";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import ProfileSetting from "./ProfileSetting";
 
 const levelIcon = require("../../assets/profile/level.png");
@@ -30,7 +21,6 @@ const settingsIcon = require("../../assets/profile/settings.png");
 const Profile = () => {
   return (
     <Screen bg="#262626">
-      <StatusBar backgroundColor="#262626" />
       <AppBar title="الملف الشخصي" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProfileHeader />

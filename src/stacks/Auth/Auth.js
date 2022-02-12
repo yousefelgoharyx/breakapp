@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import AbsoluteView from "../../components/AbsoluteView";
 import DoublePolygen from "../../components/DoublePolygen";
+import Screen from "../../components/Screen";
 import SocialButton from "../../components/SocialButton";
 import Spacer from "../../components/Spacer";
 import StyledText from "../../components/StyledText";
@@ -18,7 +19,7 @@ const headImage = require("../../assets/auth/head.png");
 const Auth = ({navigation}) => {
   const {width, height} = Dimensions.get("window");
   return (
-    <SafeAreaView style={styles.container}>
+    <Screen bg="#000" statusBarBg="#000">
       <AbsoluteView top="8%" right={56}>
         <DoublePolygen />
       </AbsoluteView>
@@ -54,7 +55,7 @@ const Auth = ({navigation}) => {
           جميع الحقوق محفوظة بموجب قانون الملكية لعام 2021 الخاص بنا
         </StyledText>
       </View>
-    </SafeAreaView>
+    </Screen>
   );
 };
 

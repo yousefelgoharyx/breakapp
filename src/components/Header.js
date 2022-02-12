@@ -1,12 +1,11 @@
 import React from "react";
-import {StatusBar, StyleSheet, TextInput, View} from "react-native";
+import {StyleSheet, TextInput, View} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
 import colors from "../utils/colors";
 const Header = () => {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={colors.primary} barStyle="default" />
       <View style={styles.searchWrapper}>
         <Feather name="search" color="#000" size={24} />
         <TextInput
