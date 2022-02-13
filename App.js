@@ -14,6 +14,8 @@ import OnBoarding from "./src/stacks/Splash/OnBoarding";
 import Stars from "./src/stacks/Ranks/Stars";
 import Rich from "./src/stacks/Ranks/Rich";
 import GroupRanks from "./src/stacks/Ranks/GroupRanks";
+import Wallet from "./src/stacks/Payment/Wallet";
+import Done from "./src/stacks/Payment/Done";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -47,6 +49,8 @@ const App = () => {
         <AppStack.Screen name="Stars" component={Stars} />
         <AppStack.Screen name="Rich" component={Rich} />
         <AppStack.Screen name="GroupRanks" component={GroupRanks} />
+        <AppStack.Screen name="Wallet" component={Wallet} />
+        <AppStack.Screen name="Done" component={Done} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

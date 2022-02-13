@@ -22,7 +22,7 @@ const Rich = () => {
   return (
     <Screen bg={colors.black} statusBarBg={colors.black}>
       <Spacer space={32} />
-      <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} />
+      <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} dark />
 
       <View style={styles.topStarsContainer}>
         <RankedPerson name="Sherif Ashraf" amount="225.13k" id="ID 3285224">

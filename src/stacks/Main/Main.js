@@ -6,6 +6,7 @@ import StyledText from "../../components/StyledText";
 import colors from "../../utils/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Profile from "../Profile/Profile";
+import Index from "../Chat/Index";
 const Tabs = createBottomTabNavigator();
 
 const MyTabBar = ({state, descriptors, navigation}) => {
@@ -49,7 +50,7 @@ const Main = () => {
         options={{title: "الرئيسية", icon: "home"}}
       />
       <Tabs.Screen
-        component={Profile}
+        component={Index}
         name="Chat"
         options={{title: "الدردشة", icon: "chat"}}
       />

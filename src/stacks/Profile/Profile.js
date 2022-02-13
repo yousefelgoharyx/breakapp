@@ -19,7 +19,7 @@ const awardIcon = require("../../assets/profile/award.png");
 const inviteIcon = require("../../assets/profile/invite.png");
 const settingsIcon = require("../../assets/profile/settings.png");
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   return (
     <Screen bg="#262626" statusBarBg="#262626">
       <AppBar title="الملف الشخصي" />
@@ -58,7 +58,11 @@ const Profile = () => {
         <View style={{paddingHorizontal: 24}}>
           <ProfileSetting title="المتجر" iconSource={storeIcon} />
           <ProfileSetting title="القبائل" iconSource={tribeIcon} />
-          <ProfileSetting title="الحفظة" iconSource={walletIcon} />
+          <ProfileSetting
+            title="الحفظة"
+            iconSource={walletIcon}
+            onPress={() => navigation.navigate("Wallet")}
+          />
           <ProfileSetting
             title="المستوي"
             iconSource={levelIcon}

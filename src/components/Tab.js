@@ -1,18 +1,28 @@
 import React, {useRef, useState, useEffect} from "react";
 import {Pressable, StyleSheet, useWindowDimensions, View} from "react-native";
 import Animated, {
+  FadeInDown,
+  FadeOutDown,
+  SlideInRight,
+  SlideOutRight,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  ZoomIn,
+  ZoomInDown,
+  ZoomOut,
+  ZoomOutDown,
 } from "react-native-reanimated";
+import colors from "../utils/colors";
 import StyledText from "./StyledText";
 
 const mySpring = x => withSpring(x, {damping: 50, stiffness: 150});
-const Tab = ({tabs, onTabChange}) => {
+const Tab = ({tabs, onTabChange = () => {}, dark}) => {
   const window = useWindowDimensions();
   const tabsInfo = useRef({}).current;
   const x = useSharedValue(window.width);
   const width = useSharedValue(0);
+
   const handleLayout = ({nativeEvent}, tabId) => {
     const layout = nativeEvent.layout;
     tabsInfo[tabId] = {x: layout.x, width: layout.width};
@@ -32,12 +42,14 @@ const Tab = ({tabs, onTabChange}) => {
     return {width: width.value, right: x.value};
   });
 
+  const tabIndicatorStyles = [styles.tabIndicator, animatedStyles];
+  if (dark) tabIndicatorStyles.push({backgroundColor: colors.primary});
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[styles.tabIndicator, animatedStyles]}></Animated.View>
+      <Animated.View style={tabIndicatorStyles}></Animated.View>
       {tabs.map(tab => (
         <TabItem
+          dark={dark}
           key={tab.id}
           title={tab.title}
           onPress={() => handlePress(tab.id)}
@@ -48,20 +60,22 @@ const Tab = ({tabs, onTabChange}) => {
   );
 };
 
-export const TabItem = ({title, onLayout, onPress}) => {
+export const TabItem = ({title, onLayout, onPress, dark}) => {
   let tabStyles = [styles.tab];
   let textStyles = [styles.tabText];
-
+  if (dark) textStyles.push({color: "#fff"});
   return (
     <Pressable style={tabStyles} onLayout={onLayout} onPress={onPress}>
-      <StyledText style={textStyles}>{title}</StyledText>
+      <StyledText bold style={textStyles}>
+        {title}
+      </StyledText>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 56,
+    height: 64,
     backgroundColor: "#ffffff70",
     alignItems: "center",
     justifyContent: "space-between",
@@ -72,7 +86,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     backgroundColor: "transparent",
-    height: 56 - 16,
+    height: 64 - 16,
     paddingHorizontal: 24,
     borderRadius: 12,
     alignItems: "center",
@@ -85,15 +99,16 @@ const styles = StyleSheet.create({
   tabText: {
     color: "#000",
     lineHeight: 26,
+    top: 1,
   },
   activeTabText: {
     color: "#FF3976",
   },
   tabIndicator: {
-    height: 40,
+    height: 64 - 16,
     backgroundColor: "#fff",
     position: "absolute",
-    borderRadius: 12,
+    borderRadius: 14,
   },
 });
 

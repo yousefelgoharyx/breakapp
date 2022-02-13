@@ -3,9 +3,10 @@ import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Spacer from "../../components/Spacer";
 import StyledText from "../../components/StyledText";
-const ProfileSetting = ({title, iconSource, leftText}) => {
+const ProfileSetting = ({title, iconSource, leftText, onPress}) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={styles.container}
       activeOpacity={leftText ? 1 : 0.2}>
       <View style={styles.iconContainer}>
@@ -15,7 +16,7 @@ const ProfileSetting = ({title, iconSource, leftText}) => {
       {leftText ? (
         <StyledText size={14}>{leftText}</StyledText>
       ) : (
-        <Icon name="chevron-left" size={32} />
+        <Icon name="chevron-left" size={32} color="#fff" />
       )}
     </TouchableOpacity>
   );

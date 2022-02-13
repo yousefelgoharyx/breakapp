@@ -24,7 +24,7 @@ const GroupRanks = ({navigation}) => {
   return (
     <Screen bg={colors.black} statusBarBg={colors.black}>
       <AppBar title="ترتيب القبائل" onBack={navigation.goBack} />
-      <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} />
+      <Tab tabs={tabs} onTabChange={tabId => setActiveTabId(tabId)} dark />
 
       <View style={styles.topStarsContainer}>
         <RankedGroup>
