@@ -16,6 +16,8 @@ import Rich from "./src/stacks/Ranks/Rich";
 import GroupRanks from "./src/stacks/Ranks/GroupRanks";
 import Wallet from "./src/stacks/Payment/Wallet";
 import Done from "./src/stacks/Payment/Done";
+import PaymentMethod from "./src/stacks/Payment/PaymentMethod";
+import Live from "./src/stacks/Rooms/Live";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -51,6 +53,8 @@ const App = () => {
         <AppStack.Screen name="GroupRanks" component={GroupRanks} />
         <AppStack.Screen name="Wallet" component={Wallet} />
         <AppStack.Screen name="Done" component={Done} />
+        <AppStack.Screen name="PaymentMethod" component={PaymentMethod} />
+        <AppStack.Screen name="Live" component={Live} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

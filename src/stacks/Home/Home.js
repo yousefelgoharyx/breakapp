@@ -48,7 +48,7 @@ const Home = ({navigation}) => {
           />
         </View>
         <HomeRow>
-          <HomePerson />
+          <HomePerson onPress={() => navigation.navigate("Live")} />
           <Spacer space={12} />
           <HomePerson />
         </HomeRow>

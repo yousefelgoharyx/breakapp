@@ -4,9 +4,12 @@ import Flag from "react-native-country-flag";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AbsoluteView from "../../components/AbsoluteView";
 import StyledText from "../../components/StyledText";
-const HomePerson = () => {
+const HomePerson = ({onPress}) => {
   return (
-    <TouchableOpacity style={personStyles.container} activeOpacity={0.7}>
+    <TouchableOpacity
+      style={personStyles.container}
+      activeOpacity={0.7}
+      onPress={onPress}>
       <View style={personStyles.imageWrapper}>
         <Image
           source={require("../../assets/person.png")}

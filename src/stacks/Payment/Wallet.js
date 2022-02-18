@@ -8,14 +8,14 @@ import Tab from "../../components/Tab";
 import Coin from "../../icons/Coin";
 import Coins from "../../icons/Coins";
 
-const CoinOption = ({amount, price}) => {
+const CoinOption = ({amount, price, onBuy}) => {
   return (
     <View style={styles.coinOption}>
       <View style={styles.coinOptionAmount}>
         <Coin style={styles.coinOptionAmountIcon} />
         <StyledText>{amount}</StyledText>
       </View>
-      <Button title={price} variant="contained" small />
+      <Button title={price} variant="contained" small onPress={onBuy} />
     </View>
   );
 };
@@ -23,16 +23,51 @@ const CoinOption = ({amount, price}) => {
 const CoinsTab = ({navigation}) => {
   return (
     <View style={styles.coinOptions}>
-      <CoinOption amount="100" price="20.99 $" />
-      <CoinOption amount="1000" price="139.99 $" />
-      <CoinOption amount="5000" price="659.99 $" />
-      <CoinOption amount="13000" price="1539.99 $" />
-      <CoinOption amount="14000" price="1539.99 $" />
-      <CoinOption amount="15000" price="1539.99 $" />
-      <CoinOption amount="15000" price="1539.99 $" />
-      <CoinOption amount="15000" price="1539.99 $" />
+      <CoinOption
+        amount="100"
+        price="20.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="1000"
+        price="139.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="5000"
+        price="659.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="13000"
+        price="1539.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="14000"
+        price="1539.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="15000"
+        price="1539.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="15000"
+        price="1539.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
+      <CoinOption
+        amount="15000"
+        price="1539.99 $"
+        onBuy={() => navigation.navigate("PaymentMethod")}
+      />
       <View style={{marginTop: 16}}>
-        <Button title="تواصل" onPress={() => navigation.navigate("Done")} />
+        <Button
+          title="تواصل معنا"
+          onPress={() => navigation.navigate("Done")}
+        />
       </View>
     </View>
   );
@@ -42,7 +77,7 @@ const FasolyaTab = () => {
   return (
     <View style={styles.coinOptions}>
       <View style={{padding: 24, marginTop: "auto"}}>
-        <Button title="تواصل" />
+        <Button title="تواصل معنا" />
       </View>
     </View>
   );
