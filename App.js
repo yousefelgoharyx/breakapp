@@ -1,10 +1,10 @@
-import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 import React from "react";
-import {I18nManager, LogBox} from "react-native";
+import { I18nManager, LogBox } from "react-native";
 import Auth from "./src/stacks/Auth/Auth";
 import CreateGroup from "./src/stacks/Auth/CreateGroup";
 import ForgotPassword from "./src/stacks/Auth/ForgotPassword";
@@ -18,6 +18,7 @@ import Wallet from "./src/stacks/Payment/Wallet";
 import Done from "./src/stacks/Payment/Done";
 import PaymentMethod from "./src/stacks/Payment/PaymentMethod";
 import Live from "./src/stacks/Rooms/Live";
+import PaymentInfo from "./src/stacks/Payment/PaymentInfo";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -54,6 +55,7 @@ const App = () => {
         <AppStack.Screen name="Wallet" component={Wallet} />
         <AppStack.Screen name="Done" component={Done} />
         <AppStack.Screen name="PaymentMethod" component={PaymentMethod} />
+        <AppStack.Screen name="PaymentInfo" component={PaymentInfo} />
         <AppStack.Screen name="Live" component={Live} />
       </AppStack.Navigator>
     </NavigationContainer>
