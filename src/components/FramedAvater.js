@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
-    zIndex: 1,
   },
   image: {
     width: 40,

@@ -1,5 +1,5 @@
-import React, {useRef} from "react";
-import {ScrollView, StyleSheet, View} from "react-native";
+import React, {useRef, useState} from "react";
+import {ScrollView, StyleSheet, TouchableOpacity, View} from "react-native";
 import Screen from "../../components/Screen";
 import StyledText from "../../components/StyledText";
 import Stars from "../../icons/Stars";
@@ -14,128 +14,150 @@ import UserCount from "../../components/UserCount";
 import FramedAvatar from "../../components/FramedAvater";
 import LabeledAvatar from "../../components/LabeledAvatar";
 import ChatMessage from "../../components/ChatMessage";
-import AbsoluteView from "../../components/AbsoluteView";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import ChatBar from "../../components/ChatBar";
+import {BottomSheetModalProvider} from "@gorhom/bottom-sheet";
+import UserModal from "./UserModal";
+import ActionsModal from "./ActionsModal";
+import UsersModal from "./UsersModal";
+import LuckBag from "./LuckBag";
+
+const users = [
+  {
+    id: 1,
+    image: require("../../assets/person.png"),
+    label: "10K",
+  },
+  {
+    id: 2,
+    image: require("../../assets/person.png"),
+    label: "10K",
+  },
+  {
+    id: 3,
+    image: require("../../assets/person.png"),
+    label: "10K",
+  },
+  {
+    id: 4,
+    image: require("../../assets/person.png"),
+    label: "10K",
+  },
+  {
+    id: 5,
+    image: require("../../assets/person.png"),
+    label: "10K",
+  },
+];
 const Live = () => {
+  const userModalRef = useRef(null);
+  const usersModalRef = useRef(null);
+  const luckBagModalRef = useRef(null);
+  const [actionModal, setActionModal] = useState(false);
+  const openUserModal = () => userModalRef.current?.present();
+  const openUsersModal = () => usersModalRef.current?.present();
+  const openLuckBagModal = () => luckBagModalRef.current?.present();
+
   return (
-    <Screen bg="#000" statusBarBg="#000">
-      <View style={styles.headerWrapper}>
-        <View style={styles.header}>
-          <Flag isoCode="EG" size={16} />
-          <StyledText bold style={styles.headerText}>
-            اصدقاء 24
-          </StyledText>
-          <Stars size={20} />
+    <BottomSheetModalProvider>
+      <Screen bg="#000" statusBarBg="#000">
+        <View style={styles.headerWrapper}>
+          <View style={styles.header}>
+            <Flag isoCode="EG" size={16} />
+            <StyledText bold style={styles.headerText}>
+              اصدقاء 24
+            </StyledText>
+            <Stars size={20} />
+          </View>
+          <View style={styles.icons}>
+            <Vote size={32} />
+            <Spacer />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => setActionModal(true)}>
+              <Logout size={32} />
+            </TouchableOpacity>
+            <Spacer />
+            <TouchableOpacity activeOpacity={0.7} onPress={openUsersModal}>
+              <Share size={34} />
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.icons}>
-          <Vote size={32} />
-          <Spacer />
-          <Logout size={32} />
-          <Spacer />
-          <Share size={34} />
+
+        <View style={styles.topUsers}>
+          <View style={styles.award}>
+            <Award />
+            <StyledText bold style={styles.awardText}>
+              30.0K
+            </StyledText>
+          </View>
+          <View style={styles.users}>
+            <UserCount count={963} />
+            <Spacer />
+            <FramedAvatar
+              frameSource={require("../../assets/frames/idk.png")}
+              imageSource={require("../../assets/person.png")}
+            />
+            <Spacer />
+            <FramedAvatar
+              frameSource={require("../../assets/frames/idk.png")}
+              imageSource={require("../../assets/person.png")}
+            />
+          </View>
         </View>
-      </View>
 
-      <View style={styles.topUsers}>
-        <View style={styles.award}>
-          <Award />
-          <StyledText bold style={styles.awardText}>
-            30.0K
-          </StyledText>
+        <View style={styles.usersRow}>
+          {users.map(user => (
+            <LabeledAvatar
+              key={user.id}
+              source={user.image}
+              label={user.label}
+              size={56}
+              onPress={openUserModal}
+            />
+          ))}
         </View>
-        <View style={styles.users}>
-          <UserCount count={963} />
-          <Spacer />
-          <FramedAvatar
-            frameSource={require("../../assets/frames/idk.png")}
-            imageSource={require("../../assets/person.png")}
-          />
-          <Spacer />
-          <FramedAvatar
-            frameSource={require("../../assets/frames/idk.png")}
-            imageSource={require("../../assets/person.png")}
-          />
+
+        <View style={styles.usersRow}>
+          {users.map(user => (
+            <LabeledAvatar
+              key={user.id}
+              source={user.image}
+              label={user.label}
+              size={56}
+              onPress={openUserModal}
+            />
+          ))}
         </View>
-      </View>
 
-      <View style={styles.usersRow}>
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
+        <ScrollView
+          style={{}}
+          contentContainerStyle={{marginTop: 24, paddingBottom: 24}}
+          showsVerticalScrollIndicator={false}>
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+          <ChatMessage source={require("../../assets/person.png")} />
+          <Spacer />
+        </ScrollView>
+        <ChatBar onShowLuckBag={openLuckBagModal} />
+        <UserModal ref={userModalRef} />
+        <UsersModal ref={usersModalRef} />
+        <LuckBag ref={luckBagModalRef} />
+        <ActionsModal
+          isOpen={actionModal}
+          requestClose={() => setActionModal(false)}
         />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-      </View>
-
-      <View style={styles.usersRow}>
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-        <LabeledAvatar
-          source={require("../../assets/person.png")}
-          label="10K"
-          size={56}
-        />
-      </View>
-
-      <ScrollView
-        style={{}}
-        contentContainerStyle={{marginTop: 24, paddingBottom: 24}}
-        showsVerticalScrollIndicator={false}>
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-        <ChatMessage source={require("../../assets/person.png")} />
-        <Spacer />
-      </ScrollView>
-      <ChatBar />
-    </Screen>
+      </Screen>
+    </BottomSheetModalProvider>
   );
 };
 
@@ -192,6 +214,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 24,
     marginTop: 8,
+    flexWrap: "wrap",
   },
 });
 

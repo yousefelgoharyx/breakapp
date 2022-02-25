@@ -51,7 +51,7 @@ const Auth = ({navigation}) => {
           icon="google"
           color="#000"
           text="Google"
-          onPress={() => navigation.navigate("Stars")}
+          onPress={() => navigation.navigate("Live")}
         />
         <Spacer space={20} />
         <SocialButton icon="mobile-alt" color="#000" text="Google" />

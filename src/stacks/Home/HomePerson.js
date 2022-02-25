@@ -57,6 +57,9 @@ const HomePerson = ({onPress}) => {
 const personStyles = StyleSheet.create({
   container: {
     flex: 1,
+    minWidth: 140,
+    maxWidth: "48%",
+    marginBottom: "2%",
   },
   imageWrapper: {
     aspectRatio: 1 / 1,

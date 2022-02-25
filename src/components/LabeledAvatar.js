@@ -1,17 +1,20 @@
 import React from "react";
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
 import colors from "../utils/colors";
 import Avatar from "./Avatar";
 import StyledText from "./StyledText";
 
-const LabeledAvatar = ({source, label, size = 48}) => {
+const LabeledAvatar = ({source, label, size = 48, onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={[styles.container]}
+      onPress={onPress}
+      activeOpacity={0.8}>
       <Avatar source={source} size={size} />
       <StyledText bold size={14} style={styles.label}>
         {label}
       </StyledText>
-    </View>
+    </TouchableOpacity>
   );
 };
 

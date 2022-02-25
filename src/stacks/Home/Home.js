@@ -49,19 +49,10 @@ const Home = ({navigation}) => {
         </View>
         <HomeRow>
           <HomePerson onPress={() => navigation.navigate("Live")} />
-          <Spacer space={12} />
           <HomePerson />
-        </HomeRow>
-
-        <HomeRow>
           <HomePerson />
-          <Spacer space={12} />
           <HomePerson />
-        </HomeRow>
-
-        <HomeRow>
           <HomePerson />
-          <Spacer space={12} />
           <HomePerson />
         </HomeRow>
       </ScrollView>
@@ -82,6 +73,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 8,
     flexWrap: "wrap",
+    justifyContent: "space-between",
   },
 });
 
