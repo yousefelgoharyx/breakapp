@@ -1,28 +1,30 @@
 import React from "react";
-import {Pressable, StyleSheet} from "react-native";
+import {Pressable, StyleSheet, TouchableOpacity, View} from "react-native";
 import Animated, {
   FadeIn,
   FadeInDown,
   FadeOut,
   FadeOutDown,
+  Layout,
+  useAnimatedStyle,
+  withTiming,
 } from "react-native-reanimated";
+import StyledText from "./StyledText";
 
 const BlackModal = ({children, isOpen, requestClose, bg = "#000000a5"}) => {
   if (!isOpen) return null;
   return (
-    <Pressable
-      onPress={requestClose}
-      style={[
-        styles.container,
-        {backgroundColor: "transparent", display: isOpen ? "flex" : "none"},
-      ]}>
-      <Animated.View
-        style={[styles.container, {backgroundColor: bg}]}
-        entering={FadeInDown}
-        exiting={FadeOutDown}>
-        {children}
-      </Animated.View>
-    </Pressable>
+    <Animated.View
+      style={[styles.container, {backgroundColor: bg}]}
+      entering={FadeInDown}
+      layout={Layout.springify()}
+      onStartShouldSetResponder={() => {
+        requestClose();
+        console.log("Hellooooo");
+      }}
+      exiting={FadeOutDown}>
+      {children}
+    </Animated.View>
   );
 };
 
@@ -36,6 +38,15 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+  },
+  animatedView: {
+    height: 300,
+    width: 200,
+    borderWidth: 1,
+    borderColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
   },
 });
 

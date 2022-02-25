@@ -51,10 +51,15 @@ const Auth = ({navigation}) => {
           icon="google"
           color="#000"
           text="Google"
-          onPress={() => navigation.navigate("Live")}
+          onPress={() => navigation.navigate("Store")}
         />
         <Spacer space={20} />
-        <SocialButton icon="mobile-alt" color="#000" text="Google" />
+        <SocialButton
+          icon="mobile-alt"
+          color="#000"
+          text="Phone"
+          onPress={() => navigation.navigate("MainTabs")}
+        />
         <Spacer space={32} />
         <StyledText size={12} style={styles.copyrightText}>
           جميع الحقوق محفوظة بموجب قانون الملكية لعام 2021 الخاص بنا

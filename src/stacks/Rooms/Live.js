@@ -20,6 +20,7 @@ import UserModal from "./UserModal";
 import ActionsModal from "./ActionsModal";
 import UsersModal from "./UsersModal";
 import LuckBag from "./LuckBag";
+import ChatActionsModal from "./ChatActionsModal";
 
 const users = [
   {
@@ -52,11 +53,13 @@ const Live = () => {
   const userModalRef = useRef(null);
   const usersModalRef = useRef(null);
   const luckBagModalRef = useRef(null);
-  const [actionModal, setActionModal] = useState(false);
+  const actionsModalRef = useRef(null);
+  const chatActionModalRef = useRef(null);
   const openUserModal = () => userModalRef.current?.present();
   const openUsersModal = () => usersModalRef.current?.present();
   const openLuckBagModal = () => luckBagModalRef.current?.present();
-
+  const openActionsModal = () => actionsModalRef.current?.present();
+  const openChatActionModalRef = () => chatActionModalRef.current?.present();
   return (
     <BottomSheetModalProvider>
       <Screen bg="#000" statusBarBg="#000">
@@ -71,9 +74,7 @@ const Live = () => {
           <View style={styles.icons}>
             <Vote size={32} />
             <Spacer />
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => setActionModal(true)}>
+            <TouchableOpacity activeOpacity={0.7} onPress={openActionsModal}>
               <Logout size={32} />
             </TouchableOpacity>
             <Spacer />
@@ -148,13 +149,15 @@ const Live = () => {
           <ChatMessage source={require("../../assets/person.png")} />
           <Spacer />
         </ScrollView>
-        <ChatBar onShowLuckBag={openLuckBagModal} />
+        <ChatBar onShowMenu={openChatActionModalRef} />
+
         <UserModal ref={userModalRef} />
         <UsersModal ref={usersModalRef} />
         <LuckBag ref={luckBagModalRef} />
-        <ActionsModal
-          isOpen={actionModal}
-          requestClose={() => setActionModal(false)}
+        <ActionsModal ref={actionsModalRef} />
+        <ChatActionsModal
+          ref={chatActionModalRef}
+          onShowLuckBag={openLuckBagModal}
         />
       </Screen>
     </BottomSheetModalProvider>

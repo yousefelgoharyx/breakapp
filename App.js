@@ -18,6 +18,7 @@ import Wallet from "./src/stacks/Payment/Wallet";
 import Done from "./src/stacks/Payment/Done";
 import PaymentMethod from "./src/stacks/Payment/PaymentMethod";
 import Live from "./src/stacks/Rooms/Live";
+import Store from "./src/stacks/Store/store";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -55,6 +56,7 @@ const App = () => {
         <AppStack.Screen name="Done" component={Done} />
         <AppStack.Screen name="PaymentMethod" component={PaymentMethod} />
         <AppStack.Screen name="Live" component={Live} />
+        <AppStack.Screen name="Store" component={Store} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

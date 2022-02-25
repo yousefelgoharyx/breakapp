@@ -56,7 +56,11 @@ const Profile = ({navigation}) => {
         </View>
         <Divider marginV={32} />
         <View style={{paddingHorizontal: 24}}>
-          <ProfileSetting title="المتجر" iconSource={storeIcon} />
+          <ProfileSetting
+            title="المتجر"
+            iconSource={storeIcon}
+            onPress={() => navigation.navigate("Store")}
+          />
           <ProfileSetting title="القبائل" iconSource={tribeIcon} />
           <ProfileSetting
             title="الحفظة"

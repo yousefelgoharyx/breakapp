@@ -1,3 +1,4 @@
+import {BottomSheetModal} from "@gorhom/bottom-sheet";
 import React from "react";
 import {
   Image,
@@ -12,19 +13,9 @@ import Game from "../icons/Game";
 import Gift from "../icons/Gift";
 import Menu from "../icons/Menu";
 import AbsoluteView from "./AbsoluteView";
-import BlackModal from "./BlackModal";
 import Spacer from "./Spacer";
-import StyledText from "./StyledText";
 
-const CatItem = ({title, source, width = 32, height = 32, onPress}) => {
-  return (
-    <TouchableOpacity style={styles.catItem} onPress={onPress}>
-      <Image source={source} style={{width, height, marginBottom: 8}} />
-      <StyledText style={styles.catText}>{title}</StyledText>
-    </TouchableOpacity>
-  );
-};
-const ChatBar = ({onShowLuckBag}) => {
+const ChatBar = ({onShowMenu}) => {
   const [height, setHeight] = React.useState(40);
   const [open, setOpen] = React.useState(false);
   const inputRef = React.useRef(null);
@@ -70,72 +61,10 @@ const ChatBar = ({onShowLuckBag}) => {
 
         <TouchableOpacity
           style={[styles.iconContainer, {backgroundColor: "#FEBF02"}]}
-          onPress={() => setOpen(!open)}>
+          onPress={onShowMenu}>
           <Menu size={16} />
         </TouchableOpacity>
       </View>
-      <BlackModal
-        isOpen={open}
-        requestClose={() => setOpen(false)}
-        bg="transparent">
-        <View
-          style={{
-            flex: 1,
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
-            alignSelf: "stretch",
-          }}>
-          <View
-            style={{
-              padding: 16,
-              backgroundColor: "#fff",
-              alignSelf: "stretch",
-              margin: 32,
-              borderRadius: 16,
-            }}>
-            <View style={styles.catRow}>
-              <CatItem
-                title="لعبة النرد"
-                source={require("../assets/icons/dice.png")}
-              />
-              <CatItem
-                title="كتم الصوت"
-                source={require("../assets/icons/volume-mute.png")}
-              />
-              <CatItem
-                title="رقم الحظ"
-                source={require("../assets/icons/numbers.png")}
-              />
-              <CatItem
-                title="الخلفية"
-                source={require("../assets/icons/background.png")}
-              />
-            </View>
-            <Spacer space={24} />
-            <View style={styles.catRow}>
-              <CatItem
-                title="العداد"
-                source={require("../assets/icons/calc.png")}
-                width={28}
-                height={32}
-              />
-              <CatItem
-                title="الوسيقي"
-                source={require("../assets/icons/musical-note.png")}
-              />
-              <CatItem
-                title="كيس الحظ"
-                source={require("../assets/icons/money-bag.png")}
-                onPress={onShowLuckBag}
-              />
-              <CatItem
-                title="مسح"
-                source={require("../assets/icons/delete.png")}
-              />
-            </View>
-          </View>
-        </View>
-      </BlackModal>
     </>
   );
 };
@@ -177,20 +106,6 @@ const styles = StyleSheet.create({
   },
   inputIcon: {
     marginTop: 12,
-  },
-  catItem: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 72,
-  },
-  catText: {
-    color: "#000",
-    fontSize: 14,
-  },
-  catRow: {
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    flexDirection: "row",
   },
 });
 
