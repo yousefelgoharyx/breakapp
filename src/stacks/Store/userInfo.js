@@ -2,23 +2,18 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import GoldFrame from "../../components/GoldFrame";
 import StyledText from "../../components/StyledText";
-import Coin from "../../icons/Coin";
+import UserBlance from "./userBalance";
 import Icon from "react-native-vector-icons/Ionicons";
+
 const personImage = require("../../assets/person.png");
 
 const UserInfo = () => {
   return (
     <View style={styles.profileContainer}>
-      <View style={styles.topIcon}>
-        <Icon
-          name="chevron-forward-outline"
-          size={24}
-          color={"#fff"}
-          style={styles.headerIcon}
-        />
-        <StyledText bold>{"200"}</StyledText>
-        <Coin style={{marginHorizontal: 10}}></Coin>
+      <View style={{position: "absolute", top: 16, left: 8}}>
+        <UserBlance onArrowClick={() => {}} />
       </View>
+
       <View style={styles.column}>
         <GoldFrame source={personImage} />
         <StyledText bold>{"Sherif Ashraf"}</StyledText>
@@ -37,22 +32,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  topIcon: {
-    flexDirection: "row",
-    position: "absolute",
-    top: 30,
-    left: 10,
-  },
+
   profileContainer: {
     flexDirection: "row",
-    padding: 20,
-    paddingTop: 45,
+    padding: 24,
+    paddingVertical: 32,
     justifyContent: "center",
     backgroundColor: "rgba(52, 52, 52, 0.2)",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#FF9639",
-    margin: 10,
+    marginHorizontal: 24,
+    marginBottom: 16,
     flexWrap: "wrap",
     justifyContent: "space-between",
   },

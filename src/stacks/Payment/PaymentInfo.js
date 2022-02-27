@@ -1,55 +1,120 @@
-import React, { useState } from "react";
-import { Image, Pressable, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import React, {useState} from "react";
+import {Image, StyleSheet, View} from "react-native";
 import AppBar from "../../components/AppBar";
 import Button from "../../components/Button";
 import Screen from "../../components/Screen";
+import {TextInputMask} from "react-native-masked-text";
+import Spacer from "../../components/Spacer";
 import StyledText from "../../components/StyledText";
-import colors from "../../utils/colors";
-import { TextInputMask } from 'react-native-masked-text'
-const RadioButton = ({ active }) => (
-    <View style={{ borderColor: colors.primary, borderWidth: 2, width: 20, height: 20, borderRadius: 20 / 2, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ backgroundColor: colors.primary, width: active ? 12 : 0, height: active ? 12 : 0, borderRadius: 12 / 2 }}></View>
-    </View>
-)
 
-const PaymentInfo = ({ navigation }) => {
-    const [state, setState] = useState({
-        date: ""
-    })
-    return (
-        <Screen statusBarBg="#000" bg="#000">
-            <AppBar title="فيزا" />
+const PaymentInput = ({icon, ...rest}) => (
+  <View style={styles.inputWrapper}>
+    <TextInputMask {...rest} />
+    <Image source={icon} style={styles.inputImage} />
+  </View>
+);
+const PaymentInfo = ({navigation}) => {
+  const [state, setState] = useState({
+    date: "",
+    number: "",
+    cvv: "",
+  });
+  return (
+    <Screen statusBarBg="#000" bg="#000">
+      <AppBar title="فيزا" />
 
-            <View style={styles.content}>
-                <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', justifyContent: 'center', alignSelf: 'stretch' }}>
-                    <TextInputMask onChangeText={(text) => {
-                        setState(prev => ({ ...prev, date: text }))
-                    }} value={state.date} style={{ padding: 12, flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 8, fontFamily: 'Cairo' }} type="datetime" options={{ format: "YY/MM" }} placeholder="YY/MM" placeholderTextColor={"#999"} />
-                    <TextInputMask onChangeText={(text) => {
-                        setState(prev => ({ ...prev, date: text }))
-                    }} value={state.date} style={{ padding: 12, flex: 1, borderColor: colors.primary, borderWidth: 1, borderRadius: 8, fontFamily: 'Cairo' }} type="datetime" options={{ format: "YY/MM" }} placeholder="YY/MM" placeholderTextColor={"#999"} />
-
-                </View>
-
-            </View>
-            <View style={{ alignSelf: 'stretch', padding: 24 }}>
-
-                <Button title="دفع" onPress={() => navigation.navigate("Done")} />
-            </View>
-        </Screen>
-    );
+      <View style={styles.content}>
+        <StyledText>بيانات كارت الدفع الخاص بك</StyledText>
+        <View style={styles.inputGroup}>
+          <PaymentInput
+            onChangeText={text => {
+              setState(prev => ({...prev, number: text}));
+            }}
+            value={state.number}
+            style={styles.input}
+            type="credit-card"
+            options={{format: "YY/MM"}}
+            placeholder="Cart Number"
+            placeholderTextColor={"#fff"}
+            icon={require("../../assets/icons/credit-card.png")}
+          />
+        </View>
+        <View style={styles.inputGroup}>
+          <PaymentInput
+            onChangeText={text => {
+              setState(prev => ({...prev, cvv: text}));
+            }}
+            value={state.cvv}
+            style={styles.input}
+            type="only-numbers"
+            placeholder="CVV"
+            placeholderTextColor={"#fff"}
+            maxLength={3}
+            icon={require("../../assets/icons/cvv.png")}
+          />
+          <Spacer />
+          <PaymentInput
+            onChangeText={text => {
+              setState(prev => ({...prev, date: text}));
+            }}
+            value={state.date}
+            style={styles.input}
+            maxLength={5}
+            type="datetime"
+            options={{format: "YY/MM"}}
+            placeholder="YY/MM"
+            placeholderTextColor={"#fff"}
+            icon={require("../../assets/icons/calendar.png")}
+          />
+        </View>
+      </View>
+      <Button
+        style={styles.button}
+        title="دفع"
+        onPress={() => navigation.navigate("Done")}
+      />
+    </Screen>
+  );
 };
 
 const styles = StyleSheet.create({
-    header: {
-        alignSelf: "center",
-    },
-    content: {
-        alignItems: "center",
-        flex: 1,
-        paddingHorizontal: 24
-    },
-
+  header: {
+    alignSelf: "center",
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "#707070",
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    height: 48,
+    borderRadius: 8,
+    flex: 1,
+  },
+  input: {
+    flex: 1,
+    fontFamily: "Cairo",
+    height: "100%",
+  },
+  inputImage: {
+    marginStart: 8,
+    width: 20,
+    height: 20,
+  },
+  button: {
+    margin: 24,
+  },
+  inputGroup: {
+    flexDirection: "row",
+    marginTop: 16,
+  },
 });
 
 export default PaymentInfo;

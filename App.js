@@ -18,7 +18,7 @@ import Wallet from "./src/stacks/Payment/Wallet";
 import Done from "./src/stacks/Payment/Done";
 import PaymentMethod from "./src/stacks/Payment/PaymentMethod";
 import Live from "./src/stacks/Rooms/Live";
-import Store from "./src/stacks/Store/store";
+import Store from "./src/stacks/Store/Store";
 import PaymentInfo from "./src/stacks/Payment/PaymentInfo";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);

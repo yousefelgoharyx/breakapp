@@ -2,7 +2,7 @@ import React from "react";
 import {Pressable, StyleSheet} from "react-native";
 import colors from "../utils/colors";
 import StyledText from "./StyledText";
-const Button = ({title, variant, onPress, small}) => {
+const Button = ({title, variant, onPress, small, color, style}) => {
   let containerStyles = [styles.container];
   let textStyles = {};
   if (variant === "outlined") {
@@ -10,7 +10,9 @@ const Button = ({title, variant, onPress, small}) => {
     textStyles = styles.outlinedText;
   }
 
+  if (color == "green") containerStyles.push(styles.containerGreen);
   if (small) containerStyles.push(styles.containerSmall);
+  containerStyles.push(StyleSheet.flatten(style));
   return (
     <Pressable style={containerStyles} onPress={onPress}>
       <StyledText style={textStyles}>{title}</StyledText>
@@ -31,6 +33,9 @@ const styles = StyleSheet.create({
   },
   containerSmall: {
     height: 40,
+  },
+  containerGreen: {
+    backgroundColor: "#00AE2E",
   },
   outlinedContainer: {
     backgroundColor: "transparent",
