@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {StyleSheet, TextInput} from "react-native";
+import {Controller, useController} from "react-hook-form";
+import {StyleSheet, TextInput, View} from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -8,56 +9,66 @@ import Animated, {
 } from "react-native-reanimated";
 import colors from "../utils/colors";
 import StyledText from "./StyledText";
+
 const Input = ({
   placeholder,
   onChangeText,
   isSecure,
-  maxChars = 1000,
-  showMaxCharsIndicator,
+  control = null,
+  rules,
+  invalid,
+  name = "",
+  message = "",
   ...rest
 }) => {
-  const [charCount, setCharCount] = useState(0);
-  const [value, setValue] = useState("");
   const borderColorValue = useSharedValue(0);
   const borderStyles = useAnimatedStyle(() => {
     const borderBottomColor = interpolateColor(
       borderColorValue.value,
       [0, 100],
-      ["#707070", colors.primary],
+      ["#707070", invalid ? "red" : colors.primary],
     );
     return {borderBottomColor};
   });
   const handleFocus = () => (borderColorValue.value = withSpring(100));
-  const handleBlur = () => (borderColorValue.value = withSpring(0));
-
-  const handleChangeText = text => {
-    if (text.length <= maxChars) {
-      setValue(text);
-      setCharCount(text.length);
-      onChangeText ? onChangeText(value) : null;
-    }
-  };
+  const handleBlur = () =>
+    invalid
+      ? (borderColorValue.value = withSpring(100))
+      : (borderColorValue.value = withSpring(0));
+  const {field} = useController({
+    control,
+    rules,
+    defaultValue: "",
+    name,
+  });
   return (
-    <Animated.View style={[styles.inputWrapper, borderStyles]}>
-      <TextInput
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        selectionColor={colors.primary}
-        placeholderTextColor="#fafafa50"
-        placeholder={placeholder}
-        textAlign="right"
-        style={styles.input}
-        onChangeText={handleChangeText}
-        secureTextEntry={isSecure}
-        value={value}
-        {...rest}
-      />
-      {showMaxCharsIndicator ? (
-        <StyledText size={14} style={styles.max}>
-          {`${charCount}/${maxChars}`}
+    <View style={{marginBottom: 8}}>
+      <Animated.View
+        style={[
+          styles.inputWrapper,
+          borderStyles,
+          invalid ? {borderBottomColor: "red"} : null,
+        ]}>
+        <TextInput
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          selectionColor={colors.primary}
+          placeholderTextColor="#fafafa50"
+          placeholder={placeholder}
+          textAlign="right"
+          style={styles.input}
+          onChangeText={field.onChange}
+          secureTextEntry={isSecure}
+          value={field.value}
+          {...rest}
+        />
+      </Animated.View>
+      {invalid ? (
+        <StyledText size={12} style={{color: "red"}}>
+          {message}
         </StyledText>
       ) : null}
-    </Animated.View>
+    </View>
   );
 };
 
@@ -66,7 +77,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     height: 48,
     flexDirection: "row",
-    marginBottom: 24,
+    alignItems: "center",
+    marginBottom: 8,
   },
   input: {
     textAlign: "right",

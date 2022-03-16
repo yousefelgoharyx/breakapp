@@ -1,8 +1,8 @@
 import React from "react";
-import {Pressable, StyleSheet} from "react-native";
+import {TouchableOpacity, StyleSheet, ActivityIndicator} from "react-native";
 import colors from "../utils/colors";
 import StyledText from "./StyledText";
-const Button = ({title, variant, onPress, small, color, style}) => {
+const Button = ({title, variant, onPress, small, color, style, loading}) => {
   let containerStyles = [styles.container];
   let textStyles = {};
   if (variant === "outlined") {
@@ -14,9 +14,17 @@ const Button = ({title, variant, onPress, small, color, style}) => {
   if (small) containerStyles.push(styles.containerSmall);
   containerStyles.push(StyleSheet.flatten(style));
   return (
-    <Pressable style={containerStyles} onPress={onPress}>
-      <StyledText style={textStyles}>{title}</StyledText>
-    </Pressable>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={containerStyles}
+      disabled={loading}
+      onPress={onPress}>
+      {loading ? (
+        <ActivityIndicator color={colors.dark} size={28} />
+      ) : (
+        <StyledText style={textStyles}>{title}</StyledText>
+      )}
+    </TouchableOpacity>
   );
 };
 

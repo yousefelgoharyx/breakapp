@@ -1,7 +1,7 @@
 import React, {useLayoutEffect} from "react";
 import {StatusBar, View} from "react-native";
 import colors from "../utils/colors";
-const Screen = ({children, bg, statusBarBg, gutter = 0}) => {
+const Screen = ({children, bg, statusBarBg, gutter = 0, ...rest}) => {
   return (
     <>
       <StatusBar translucent={true} backgroundColor="transparent" />
@@ -15,7 +15,8 @@ const Screen = ({children, bg, statusBarBg, gutter = 0}) => {
           flex: 1,
           backgroundColor: bg || colors.bg,
           marginHorizontal: gutter,
-        }}>
+        }}
+        {...rest}>
         {children}
       </View>
     </>

@@ -8,6 +8,7 @@ import ProfileBadge from "./ProfileBadge";
 import ProfileStat from "./ProfileStat";
 import Divider from "../../components/Divider";
 import ProfileSetting from "./ProfileSetting";
+import {useAuth} from "../../context/auth";
 
 const levelIcon = require("../../assets/profile/level.png");
 const globeIcon = require("../../assets/profile/globe.png");
@@ -20,11 +21,12 @@ const inviteIcon = require("../../assets/profile/invite.png");
 const settingsIcon = require("../../assets/profile/settings.png");
 
 const Profile = ({navigation}) => {
+  const {user, logout} = useAuth();
   return (
     <Screen bg="#262626" statusBarBg="#262626">
       <AppBar title="الملف الشخصي" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ProfileHeader />
+        <ProfileHeader name={user?.name} id="125545" />
         <View style={styles.infoContainer}>
           <View style={styles.badgesSection}>
             <ProfileBadge title="مصر" imageSource={globeIcon} bg="#FFA564" />
@@ -74,7 +76,11 @@ const Profile = ({navigation}) => {
           />
           <ProfileSetting title="الاوسمة" iconSource={awardIcon} />
           <ProfileSetting title="دعوة الاصدقاء" iconSource={inviteIcon} />
-          <ProfileSetting title="الاعدادات" iconSource={settingsIcon} />
+          <ProfileSetting
+            title="الاعدادات"
+            iconSource={settingsIcon}
+            onPress={logout}
+          />
         </View>
       </ScrollView>
     </Screen>

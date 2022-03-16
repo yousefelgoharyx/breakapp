@@ -4,18 +4,18 @@ import StyledText from "../../components/StyledText";
 
 const idIcon = require("../../assets/profile/id.png");
 const profileImage = require("../../assets/person.png");
-const ProfileHeader = () => {
+const ProfileHeader = ({name, id}) => {
   return (
     <View>
       <View style={styles.imageWrapper}>
         <Image source={profileImage} style={styles.image} />
       </View>
       <View style={styles.infoWrapper}>
-        <StyledText bold>Sherif Ashraf</StyledText>
+        <StyledText bold>{name}</StyledText>
         <View style={styles.idWrapper}>
           <Image source={idIcon} style={styles.idIcon} />
           <StyledText size={14} style={styles.idText}>
-            1559856
+            {id}
           </StyledText>
         </View>
       </View>

@@ -6,6 +6,8 @@ import DoublePolygen from "../../components/DoublePolygen";
 import OnBoardingItem from "./OnBoardingItem";
 import OnBoardingButton from "./OnBoardingButton";
 import Paginator from "./Paginator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useAuth} from "../../context/auth";
 
 const steps = [
   {
@@ -32,6 +34,7 @@ const steps = [
 ];
 
 const OnBoarding = ({navigation}) => {
+  const {setOnboarding} = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const stepsRef = useRef(null);
@@ -44,11 +47,14 @@ const OnBoarding = ({navigation}) => {
     setCurrentIndex(viewableItems[0].index);
   }).current;
 
-  const scrollTo = () => {
+  const scrollTo = async () => {
     if (currentIndex < steps.length - 1) {
       stepsRef.current.scrollToIndex({index: currentIndex + 1});
     } else {
-      navigation.navigate("Auth");
+      try {
+        await AsyncStorage.setItem("onboardingShown", "true");
+        setOnboarding(false);
+      } catch {}
     }
   };
   return (

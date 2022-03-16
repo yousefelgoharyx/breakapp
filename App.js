@@ -20,6 +20,9 @@ import PaymentMethod from "./src/stacks/Payment/PaymentMethod";
 import Live from "./src/stacks/Rooms/Live";
 import Store from "./src/stacks/Store/Store";
 import PaymentInfo from "./src/stacks/Payment/PaymentInfo";
+import CreateUser from "./src/stacks/Auth/CreateUser";
+import {AuthProvider, useAuth} from "./src/context/auth";
+import UploadAvatar from "./src/stacks/Auth/UploadAvatar";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -36,20 +39,25 @@ LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
 
-const App = () => {
-  return (
-    <NavigationContainer theme={theme}>
-      <AppStack.Navigator
-        screenOptions={{
-          headerShown: false,
-          cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-        }}>
+const stackOptions = {
+  headerShown: false,
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+};
+
+const AppInside = () => {
+  const {user, loading, onboarding} = useAuth();
+  if (loading) return null;
+  if (onboarding)
+    return (
+      <AppStack.Navigator screenOptions={stackOptions}>
         <AppStack.Screen name="OnBoarding" component={OnBoarding} />
-        <AppStack.Screen name="Auth" component={Auth} />
-        <AppStack.Screen name="Login" component={Login} />
-        <AppStack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <AppStack.Screen name="CreateGroup" component={CreateGroup} />
+      </AppStack.Navigator>
+    );
+  if (user)
+    return (
+      <AppStack.Navigator screenOptions={stackOptions}>
         <AppStack.Screen name="MainTabs" component={Main} />
+        <AppStack.Screen name="CreateGroup" component={CreateGroup} />
         <AppStack.Screen name="Stars" component={Stars} />
         <AppStack.Screen name="Rich" component={Rich} />
         <AppStack.Screen name="GroupRanks" component={GroupRanks} />
@@ -59,8 +67,27 @@ const App = () => {
         <AppStack.Screen name="PaymentInfo" component={PaymentInfo} />
         <AppStack.Screen name="Live" component={Live} />
         <AppStack.Screen name="Store" component={Store} />
+        <AppStack.Screen name="UploadAvatar" component={UploadAvatar} />
       </AppStack.Navigator>
-    </NavigationContainer>
+    );
+  else
+    return (
+      <AppStack.Navigator screenOptions={stackOptions}>
+        <AppStack.Screen name="Auth" component={Auth} />
+        <AppStack.Screen name="Login" component={Login} />
+        <AppStack.Screen name="CreateUser" component={CreateUser} />
+        <AppStack.Screen name="ForgotPassword" component={ForgotPassword} />
+      </AppStack.Navigator>
+    );
+};
+const App = () => {
+  // const isLoggedIn = storage.getString("auth_token");
+  return (
+    <AuthProvider>
+      <NavigationContainer theme={theme}>
+        <AppInside />
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 

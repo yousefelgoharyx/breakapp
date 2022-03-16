@@ -15,11 +15,7 @@ const CreateGroup = ({navigation}) => {
         <AuthFlowView>
           <ImageUpload onImageChange={images => console.log(images[0].uri)} />
           <Spacer space={32} />
-          <Input
-            placeholder="اسم المستخدم"
-            maxChars={11}
-            showMaxCharsIndicator
-          />
+          <Input placeholder="اسم المستخدم" />
           <Input placeholder="رقم الهاتف" keyboardType="phone-pad" />
           <Input placeholder="البلد" />
           <Input placeholder="الجنس" />

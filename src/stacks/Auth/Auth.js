@@ -51,14 +51,14 @@ const Auth = ({navigation}) => {
           icon="google"
           color="#000"
           text="Google"
-          onPress={() => navigation.navigate("Store")}
+          onPress={() => navigation.navigate("UploadAvatar")}
         />
         <Spacer space={20} />
         <SocialButton
           icon="mobile-alt"
           color="#000"
           text="Phone"
-          onPress={() => navigation.navigate("MainTabs")}
+          onPress={() => navigation.navigate("Login")}
         />
         <Spacer space={32} />
         <StyledText size={12} style={styles.copyrightText}>
