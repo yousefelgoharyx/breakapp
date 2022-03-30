@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'com.google.gms.google-services'
 // project.ext.vectoricons = [
 //     iconFontNames: [ 'MaterialIcons.ttf', 'IonIcons.ttf' ] // Name of the font files you want to copy
 // ]
@@ -197,6 +197,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"

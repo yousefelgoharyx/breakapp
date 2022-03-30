@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "616751392784",
+    "project_id": "breakchat-12",
+    "storage_bucket": "breakchat-12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616751392784:android:fd2d3769f693d648f5c295",
+        "android_client_info": {
+          "package_name": "com.breakapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616751392784-nsul0futdm1pl3vrs188e1t2h3abr1kv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.breakapp",
+            "certificate_hash": "e1493371d28420f3b9e526e1bb093da8feefe5f9"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCebP25XW2wY5XLjKLtNP1hNRfAVEUoWfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616751392784-v2bhe8ilqacnsqbh69n2drjh5mk2h64r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

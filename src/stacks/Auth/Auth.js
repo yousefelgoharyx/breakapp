@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Image,
-  SafeAreaView,
-  useWindowDimensions,
-  Dimensions,
-  StyleSheet,
-  View,
-} from "react-native";
+import {Image, Dimensions, StyleSheet, View} from "react-native";
 import AbsoluteView from "../../components/AbsoluteView";
 import DoublePolygen from "../../components/DoublePolygen";
 import Screen from "../../components/Screen";
@@ -18,6 +11,7 @@ import colors from "../../utils/colors";
 const headImage = require("../../assets/auth/head.png");
 const Auth = ({navigation}) => {
   const {width, height} = Dimensions.get("window");
+
   return (
     <Screen bg="#000" statusBarBg="#000">
       <AbsoluteView top="8%" right={56}>
@@ -41,18 +35,9 @@ const Auth = ({navigation}) => {
           سجل الدخول للاستمتاح بمزيد من المميزات
         </StyledText>
         <Spacer space={24} />
-        <SocialButton
-          onPress={() => navigation.navigate("Login")}
-          icon="facebook"
-          text="Facebook"
-        />
+        <SocialButton icon="facebook" text="Facebook" />
         <Spacer />
-        <SocialButton
-          icon="google"
-          color="#000"
-          text="Google"
-          onPress={() => navigation.navigate("UploadAvatar")}
-        />
+        <SocialButton icon="google" color="#000" text="Google" />
         <Spacer space={20} />
         <SocialButton
           icon="mobile-alt"

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZE / 6,
     transform: [{rotate: "45deg"}],
   },
-  icon: {transform: [{rotate: "-45deg"}]},
+  icon: {transform: [{rotate: "-45deg"}], color: "#fff"},
   image: {
     width: SIZE,
     height: SIZE,

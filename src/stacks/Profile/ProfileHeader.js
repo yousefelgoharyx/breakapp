@@ -3,7 +3,7 @@ import {Image, StyleSheet, View} from "react-native";
 import StyledText from "../../components/StyledText";
 
 const idIcon = require("../../assets/profile/id.png");
-const profileImage = require("../../assets/person.png");
+const profileImage = require("../../assets/avatar.jpg");
 const ProfileHeader = ({name, id}) => {
   return (
     <View>

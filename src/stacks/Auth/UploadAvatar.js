@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import ImageUpload from "../../components/ImageUpload";
 import Screen from "../../components/Screen";
 import instance from "../../utils/axios";
-const UploadAvatar = () => {
+const UploadAvatar = ({navigation}) => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const handleImageUpload = () => {
@@ -28,8 +28,11 @@ const UploadAvatar = () => {
           setLoading(false);
         })
         .catch(e => {
-          console.log("Error");
-          console.log(e.response.data);
+          Snackbar.show({
+            text: "حدث خطا ما",
+            rtl: true,
+            fontFamily: "Cairo",
+          });
           setLoading(false);
         });
     } else {
@@ -59,6 +62,12 @@ const UploadAvatar = () => {
           loading={loading}
           title="تم"
           style={{marginTop: 24, alignSelf: "stretch"}}
+        />
+        <Button
+          onPress={() => navigation.navigate("MainTabs")}
+          loading={loading}
+          title="تخطي"
+          style={{marginTop: 8, alignSelf: "stretch"}}
         />
       </View>
     </Screen>

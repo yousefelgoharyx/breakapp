@@ -15,7 +15,7 @@ import Menu from "../icons/Menu";
 import AbsoluteView from "./AbsoluteView";
 import Spacer from "./Spacer";
 
-const ChatBar = ({onShowMenu}) => {
+const ChatBar = ({onShowMenu, onStartCall}) => {
   const [height, setHeight] = React.useState(40);
   const [open, setOpen] = React.useState(false);
   const inputRef = React.useRef(null);
@@ -30,9 +30,9 @@ const ChatBar = ({onShowMenu}) => {
             <Chest size={20} />
           </View>
         </AbsoluteView>
-        <View style={styles.iconContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={onStartCall}>
           <Icon name="mic" size={24} color="#fff" />
-        </View>
+        </TouchableOpacity>
         <Spacer space={8} />
         <View style={styles.inputContainer}>
           <Icon name="sms" size={20} color="#fff" style={styles.inputIcon} />

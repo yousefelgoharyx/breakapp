@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {ScrollView, StyleSheet, TouchableOpacity, View} from "react-native";
 import Screen from "../../components/Screen";
 import StyledText from "../../components/StyledText";
@@ -21,7 +21,9 @@ import ActionsModal from "./ActionsModal";
 import UsersModal from "./UsersModal";
 import LuckBag from "./LuckBag";
 import ChatActionsModal from "./ChatActionsModal";
-
+import RtcEngine from "react-native-agora";
+import {Button} from "react-native";
+import {useRequestAudio} from "../../hooks/useAudioPermission";
 const users = [
   {
     id: 1,
@@ -55,6 +57,55 @@ const Live = () => {
   const luckBagModalRef = useRef(null);
   const actionsModalRef = useRef(null);
   const chatActionModalRef = useRef(null);
+  useRequestAudio();
+  const rtcEngine = useRef(null);
+
+  const [callState, setCallState] = useState({
+    joined: false,
+  });
+  const initAgora = useCallback(async () => {
+    rtcEngine.current = await RtcEngine.create(
+      "1c95a789c7f04acc8c7852ef280c5336",
+    );
+    await rtcEngine.current?.enableAudio();
+    await rtcEngine.current?.setEnableSpeakerphone(!true);
+    rtcEngine.current.addListener("UserJoined", (uid, elapsed) => {
+      console.log("UserJoined", uid, elapsed);
+    });
+
+    rtcEngine.current.addListener("Error", e => {
+      console.log("Error", e);
+    });
+    rtcEngine.current.addListener(
+      "JoinChannelSucess",
+      (channel, uid, elapsed) => {
+        console.log("JoinChannelSuccess", channel, uid, elapsed);
+      },
+    );
+  }, []);
+
+  useEffect(() => {
+    initAgora();
+  }, []);
+
+  const startCall = async () => {
+    try {
+      await rtcEngine.current?.joinChannel(
+        "0061c95a789c7f04acc8c7852ef280c5336IAB4YgSlR+aLI0j63VU8Jgdikp4Opg48EqKqy9xXhenJ3wx+f9gAAAAAEADR1hyrWMZFYgEAAQBYxkVi",
+        "test",
+        null,
+        0,
+      );
+      setCallState({...callState, joined: true});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const endCall = async () => {
+    await rtcEngine.current?.leaveChannel();
+    setCallState({...callState, joined: false});
+  };
   const openUserModal = () => userModalRef.current?.present();
   const openUsersModal = () => usersModalRef.current?.present();
   const openLuckBagModal = () => luckBagModalRef.current?.present();
@@ -63,6 +114,8 @@ const Live = () => {
   return (
     <BottomSheetModalProvider>
       <Screen bg="#000" statusBarBg="#000">
+        <Button title="Start Call" onPress={startCall} />
+        <Button title="End Call" onPress={endCall} />
         <View style={styles.headerWrapper}>
           <View style={styles.header}>
             <Flag isoCode="EG" size={16} />
@@ -149,7 +202,7 @@ const Live = () => {
           <ChatMessage source={require("../../assets/person.png")} />
           <Spacer />
         </ScrollView>
-        <ChatBar onShowMenu={openChatActionModalRef} />
+        <ChatBar onShowMenu={openChatActionModalRef} onStartCall={startCall} />
 
         <UserModal ref={userModalRef} />
         <UsersModal ref={usersModalRef} />

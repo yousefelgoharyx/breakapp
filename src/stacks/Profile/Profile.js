@@ -19,6 +19,7 @@ const walletIcon = require("../../assets/profile/wallet.png");
 const awardIcon = require("../../assets/profile/award.png");
 const inviteIcon = require("../../assets/profile/invite.png");
 const settingsIcon = require("../../assets/profile/settings.png");
+const logoutIcon = require("../../assets/icons/logout.png");
 
 const Profile = ({navigation}) => {
   const {user, logout} = useAuth();
@@ -26,7 +27,11 @@ const Profile = ({navigation}) => {
     <Screen bg="#262626" statusBarBg="#262626">
       <AppBar title="الملف الشخصي" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ProfileHeader name={user?.name} id="125545" />
+        <ProfileHeader
+          name={user?.name}
+          id="125545"
+          profileImage={require("../../assets/avatar.jpg")}
+        />
         <View style={styles.infoContainer}>
           <View style={styles.badgesSection}>
             <ProfileBadge title="مصر" imageSource={globeIcon} bg="#FFA564" />
@@ -76,9 +81,11 @@ const Profile = ({navigation}) => {
           />
           <ProfileSetting title="الاوسمة" iconSource={awardIcon} />
           <ProfileSetting title="دعوة الاصدقاء" iconSource={inviteIcon} />
+          <ProfileSetting title="الاعدادات" iconSource={settingsIcon} />
+
           <ProfileSetting
-            title="الاعدادات"
-            iconSource={settingsIcon}
+            title="خروج"
+            iconSource={logoutIcon}
             onPress={logout}
           />
         </View>

@@ -4,7 +4,7 @@ import Flag from "react-native-country-flag";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AbsoluteView from "../../components/AbsoluteView";
 import StyledText from "../../components/StyledText";
-const HomePerson = ({onPress}) => {
+const HomePerson = ({onPress, image, isPrivate, name}) => {
   return (
     <TouchableOpacity
       style={personStyles.container}
@@ -12,7 +12,12 @@ const HomePerson = ({onPress}) => {
       onPress={onPress}>
       <View style={personStyles.imageWrapper}>
         <Image
-          source={require("../../assets/person.png")}
+          source={{
+            uri:
+              image === "default avatar src"
+                ? "https://i.pravatar.cc/300"
+                : image,
+          }}
           style={personStyles.image}
         />
         <View style={personStyles.imageOverlay}>
@@ -25,12 +30,14 @@ const HomePerson = ({onPress}) => {
             <Icon name="person" size={20} color="#fff" />
           </AbsoluteView>
 
-          <AbsoluteView top={12} right={8}>
-            <Image
-              source={require("../../assets/home/lock.png")}
-              style={{width: 24, height: 24}}
-            />
-          </AbsoluteView>
+          {isPrivate ? (
+            <AbsoluteView top={12} right={8}>
+              <Image
+                source={require("../../assets/home/lock.png")}
+                style={{width: 24, height: 24}}
+              />
+            </AbsoluteView>
+          ) : null}
 
           <AbsoluteView top={8} left={8}>
             <Image
@@ -41,8 +48,8 @@ const HomePerson = ({onPress}) => {
         </View>
       </View>
       <View style={personStyles.infoWrapper}>
-        <Flag isoCode="SA" size={20} style={personStyles.flag} />
-        <StyledText size={14}>رواق الجابوري</StyledText>
+        {/* <Flag isoCode="SA" size={20} style={personStyles.flag} /> */}
+        <StyledText size={14}>{name}</StyledText>
         <Icon
           name="favorite"
           size={16}

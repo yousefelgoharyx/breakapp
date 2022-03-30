@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: "Cairo",
     flex: 1,
     alignSelf: "flex-end",
+    color: "#fff",
   },
   max: {
     color: "#ffffff50",

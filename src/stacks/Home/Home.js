@@ -1,14 +1,16 @@
-import React, {useLayoutEffect} from "react";
+import React from "react";
 import {
   Image,
   ScrollView,
   StyleSheet,
   useWindowDimensions,
   View,
+  ActivityIndicator,
 } from "react-native";
 import Header from "../../components/Header";
 import Screen from "../../components/Screen";
-import Spacer from "../../components/Spacer";
+import StyledText from "../../components/StyledText";
+import useGet from "../../hooks/useGet";
 import colors from "../../utils/colors";
 import HomeCat from "./HomeCat";
 import HomePerson from "./HomePerson";
@@ -18,13 +20,47 @@ const starsImage = require("../../assets/home/stars.png");
 const TennisImage = require("../../assets/home/tennis.png");
 const CrownImage = require("../../assets/home/crowns.png");
 const adImage = require("../../assets/ad.png");
+
 const HomeRow = ({children}) => <View style={styles.row}>{children}</View>;
+
 const Home = ({navigation}) => {
   const {width} = useWindowDimensions();
+  const GetOwner = useGet("/rooms");
+
+  let rooms = (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+      }}>
+      <ActivityIndicator size="large" color={colors.primary} />
+    </View>
+  );
+  if (!GetOwner.loading && GetOwner.data) {
+    rooms = (
+      <HomeRow>
+        {GetOwner.data.rooms.rooms.map(item => (
+          <HomePerson
+            key={item._id}
+            name={item.room_name}
+            isPrivate={item.private}
+            image={item.room_owner.avatar}
+            onPress={() => navigation.navigate("Live")}
+          />
+        ))}
+      </HomeRow>
+    );
+  }
+  if (GetOwner.error) {
+    rooms = <StyledText>حدث خطا ما</StyledText>;
+  }
+
   return (
     <Screen>
       <Header />
-      <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{minHeight: "100%"}}>
         <Image
           source={adImage}
           style={{width, height: width / 4, resizeMode: "cover"}}
@@ -47,14 +83,7 @@ const Home = ({navigation}) => {
             onPress={() => navigation.navigate("Rich")}
           />
         </View>
-        <HomeRow>
-          <HomePerson onPress={() => navigation.navigate("Live")} />
-          <HomePerson />
-          <HomePerson />
-          <HomePerson />
-          <HomePerson />
-          <HomePerson />
-        </HomeRow>
+        {rooms}
       </ScrollView>
     </Screen>
   );

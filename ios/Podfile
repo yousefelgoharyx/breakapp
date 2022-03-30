@@ -12,6 +12,8 @@ target 'breakapp' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-agora', :path => '../node_modules/react-native-agora'
+
   target 'breakappTests' do
     inherit! :complete
     # Pods for testing

@@ -39,10 +39,9 @@ const CreateUser = ({navigation}) => {
     setLoading(true);
     try {
       const response = await instance.post("/users/register", data);
-      login(response.data.resutl, response.data.auth_token);
-      console.log(response.data);
+      await login(response.data.info, response.data.auth_token);
+      navigation.navigate("UploadAvatar");
       setLoading(false);
-      // toUploadAvatar();
     } catch (e) {
       Snackbar.show({
         text: e.response.data.message || e.response.data.error,
@@ -51,7 +50,6 @@ const CreateUser = ({navigation}) => {
         rtl: true,
         fontFamily: "Cairo",
       });
-      console.log(e.response.data);
       setLoading(false);
     }
   };
@@ -127,6 +125,7 @@ const CreateUser = ({navigation}) => {
           />
           <Picker
             selectedValue={genderController.field.value}
+            style={{color: "#fff"}}
             onValueChange={genderController.field.onChange}>
             <Picker.Item label="ذكر" value="Male" fontFamily="Cairo" />
             <Picker.Item label="انثي" value="Female" fontFamily="Cairo" />
