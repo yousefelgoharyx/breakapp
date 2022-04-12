@@ -37,7 +37,12 @@ const Auth = ({navigation}) => {
         <Spacer space={24} />
         <SocialButton icon="facebook" text="Facebook" />
         <Spacer />
-        <SocialButton icon="google" color="#000" text="Google" />
+        <SocialButton
+          icon="google"
+          color="#000"
+          text="Google"
+          onPress={() => navigation.navigate("UploadAvatar")}
+        />
         <Spacer space={20} />
         <SocialButton
           icon="mobile-alt"

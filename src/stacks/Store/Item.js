@@ -1,8 +1,8 @@
 import React from "react";
 import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
 import StyledText from "../../components/StyledText";
-import UserBlance from "./userBalance";
-const ItemRender = ({onPress}) => {
+import UserBlance from "./Balance";
+const Item = ({onPress}) => {
   return (
     <TouchableOpacity
       style={itemStyle.container}
@@ -60,4 +60,4 @@ const itemStyle = StyleSheet.create({
   },
 });
 
-export default ItemRender;
+export default Item;

@@ -1,27 +1,22 @@
 import React from "react";
-import {
-  ScrollView,
-  useWindowDimensions,
-  View,
-  Text,
-  StyleSheet,
-} from "react-native";
+import {View, StyleSheet} from "react-native";
 import AppBar from "../../components/AppBar";
 import Screen from "../../components/Screen";
 import UserInfo from "./UserInfo";
 import TabBar from "./tabBar";
 import Spacer from "../../components/Spacer";
-import UserBlance from "./userBalance";
+import Balance from "./Balance";
 import Button from "../../components/Button";
+import colors from "../../utils/colors";
 
 const Store = ({navigation}) => {
   return (
-    <Screen statusBarBg={"#000"}>
-      <AppBar title={"المتجر"} onBack={() => navigation.goBack()} />
+    <Screen statusBarBg={colors.bg}>
+      <AppBar title="المتجر" onBack={navigation.goBack} />
       <UserInfo />
       <TabBar />
       <View style={styles.storeControl}>
-        <UserBlance amount={12} />
+        <Balance amount={12} />
         <View style={styles.buttonsWrapper}>
           <Button small title="الاهداء" />
           <Spacer space={8} />

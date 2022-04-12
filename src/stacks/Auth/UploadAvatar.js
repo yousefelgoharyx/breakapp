@@ -4,40 +4,40 @@ import Snackbar from "react-native-snackbar";
 import Button from "../../components/Button";
 import ImageUpload from "../../components/ImageUpload";
 import Screen from "../../components/Screen";
-import instance from "../../utils/axios";
+import useMethod from "../../hooks/useMethod";
+
+const options = {
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
 const UploadAvatar = ({navigation}) => {
   const [image, setImage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const handleImageUpload = () => {
-    if (image) {
-      setLoading(true);
-      const avatarData = new FormData();
-
-      avatarData.append("avatar", {
-        name: image[0].fileName,
-        type: image[0].type,
-        uri: image[0].uri,
-        size: image[0].fileSize,
-      });
-      instance
-        .post("/users/uploadAvatar", avatarData, {
-          headers: {"Content-Type": "multipart/form-data"},
-        })
-        .then(res => {
-          console.log(res.data);
-          setLoading(false);
-        })
-        .catch(e => {
-          Snackbar.show({
-            text: "حدث خطا ما",
-            rtl: true,
-            fontFamily: "Cairo",
-          });
-          setLoading(false);
-        });
-    } else {
-      Snackbar.show({
+  const PostOwner = useMethod("post", options);
+  const handleImageUpload = async () => {
+    if (!image) {
+      return Snackbar.show({
         text: "برجاء اختيار صورة",
+        rtl: true,
+        fontFamily: "Cairo",
+      });
+    }
+
+    try {
+      const avatarData = new FormData();
+      const imageObject = {
+        src: image[0].uri,
+        name: image[0].fileName,
+        type: "file",
+      };
+      avatarData.append("avatar", imageObject);
+      const response = await PostOwner.post("/users/uploadAvatar", avatarData);
+      console.log(response);
+    } catch (error) {
+      console.log("err", error);
+      Snackbar.show({
+        text: "حدث خطا ما",
         rtl: true,
         fontFamily: "Cairo",
       });
@@ -52,20 +52,16 @@ const UploadAvatar = ({navigation}) => {
           flex: 1,
           paddingHorizontal: 32,
         }}>
-        <ImageUpload
-          onImageChange={image => {
-            setImage(image);
-          }}
-        />
+        <ImageUpload onImageChange={image => setImage(image)} />
         <Button
           onPress={handleImageUpload}
-          loading={loading}
+          loading={PostOwner.loading}
           title="تم"
           style={{marginTop: 24, alignSelf: "stretch"}}
         />
         <Button
           onPress={() => navigation.navigate("MainTabs")}
-          loading={loading}
+          loading={PostOwner.loading}
           title="تخطي"
           style={{marginTop: 8, alignSelf: "stretch"}}
         />

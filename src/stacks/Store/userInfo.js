@@ -2,23 +2,23 @@ import React from "react";
 import {StyleSheet, View} from "react-native";
 import GoldFrame from "../../components/GoldFrame";
 import StyledText from "../../components/StyledText";
-import UserBlance from "./userBalance";
-import Icon from "react-native-vector-icons/Ionicons";
-
-const personImage = require("../../assets/person.png");
+import UserBlance from "./Balance";
+import {useAuth} from "../../context/auth";
+import AbsoluteView from "../../components/AbsoluteView";
 
 const UserInfo = () => {
+  const {user} = useAuth();
   return (
     <View style={styles.profileContainer}>
-      <View style={{position: "absolute", top: 16, left: 8}}>
-        <UserBlance onArrowClick={() => {}} />
-      </View>
+      <AbsoluteView top={16} left={8}>
+        <UserBlance amount={user.golds} onArrowClick={() => {}} />
+      </AbsoluteView>
 
       <View style={styles.column}>
-        <GoldFrame source={personImage} />
-        <StyledText bold>{"Sherif Ashraf"}</StyledText>
+        <GoldFrame source={require("../../assets/avatar.jpg")} />
+        <StyledText bold>{user.name}</StyledText>
         <StyledText style={{color: "#707070"}} size={14}>
-          {"ID 5463456"}
+          ID {user._id}
         </StyledText>
       </View>
     </View>

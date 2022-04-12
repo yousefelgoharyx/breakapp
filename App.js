@@ -77,6 +77,7 @@ const AppInside = () => {
         <AppStack.Screen name="Login" component={Login} />
         <AppStack.Screen name="CreateUser" component={CreateUser} />
         <AppStack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <AppStack.Screen name="UploadAvatar" component={UploadAvatar} />
       </AppStack.Navigator>
     );
 };

@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import Header from "../../components/Header";
+import Loader from "../../components/Loader";
 import Screen from "../../components/Screen";
 import StyledText from "../../components/StyledText";
 import useGet from "../../hooks/useGet";
@@ -27,16 +28,8 @@ const Home = ({navigation}) => {
   const {width} = useWindowDimensions();
   const GetOwner = useGet("/rooms");
 
-  let rooms = (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-      }}>
-      <ActivityIndicator size="large" color={colors.primary} />
-    </View>
-  );
-  if (!GetOwner.loading && GetOwner.data) {
+  let rooms = <Loader />;
+  if (GetOwner.isReady) {
     rooms = (
       <HomeRow>
         {GetOwner.data.rooms.rooms.map(item => (
@@ -103,6 +96,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     flexWrap: "wrap",
     justifyContent: "space-between",
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: "center",
   },
 });
 

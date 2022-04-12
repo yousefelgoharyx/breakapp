@@ -8,6 +8,8 @@ const useGet = (url, callback = () => {}) => {
   const [data, setData] = useState(null);
   const [c, setC] = useState(0);
   const {user} = useAuth();
+
+  const isReady = !loading && !error && data;
   const fetch = async () => {
     setError(false);
     try {
@@ -25,13 +27,14 @@ const useGet = (url, callback = () => {}) => {
   };
 
   const reload = () => setC(c + 1);
+
   const backgroundReload = fetch;
   useEffect(() => {
     setLoading(true);
     fetch();
   }, [c]);
 
-  return {reload, loading, error, data, backgroundReload};
+  return {reload, loading, error, data, backgroundReload, isReady};
 };
 
 export default useGet;

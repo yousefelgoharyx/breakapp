@@ -3,7 +3,7 @@ import {useAuth} from "../context/auth";
 import instance from "../utils/axiosAuth";
 let defaultOptions = {
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   },
 };
 
@@ -17,11 +17,11 @@ const useMethod = (method, options = defaultOptions) => {
     setError(false);
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await instance(user.token)[method](url, data, options);
+        const res = await instance(user?.token)[method](url, data, options);
         setData(res.data);
         setLoading(false);
         setError(false);
-        resolve(res.data);
+        resolve(res);
       } catch (error) {
         setData(null);
         setLoading(false);

@@ -3,7 +3,7 @@ import {View, StyleSheet, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import StyledText from "../../components/StyledText";
 import Coin from "../../icons/Coin";
-const UserBlance = ({onArrowClick, amount = 200}) => {
+const Balance = ({onArrowClick, amount = 200}) => {
   let arrow = null;
   if (onArrowClick) {
     arrow = (
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   icon: {
-    marginStart: 12,
+    marginStart: 8,
   },
 });
-export default UserBlance;
+export default Balance;
