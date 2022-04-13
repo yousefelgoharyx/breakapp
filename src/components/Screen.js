@@ -7,7 +7,7 @@ const Screen = ({children, bg, statusBarBg, gutter = 0, ...rest}) => {
       <StatusBar translucent={true} backgroundColor="transparent" />
       <View
         style={{
-          backgroundColor: statusBarBg || colors.primary,
+          backgroundColor: statusBarBg || colors.bg,
           height: StatusBar.currentHeight,
         }}></View>
       <View

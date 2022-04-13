@@ -22,7 +22,8 @@ import PaymentInfo from "./src/stacks/Payment/PaymentInfo";
 import CreateUser from "./src/stacks/Auth/CreateUser";
 import {AuthProvider, useAuth} from "./src/context/auth";
 import UploadAvatar from "./src/stacks/Auth/UploadAvatar";
-import Store from "./src/stacks/Store/store";
+import Store from "./src/stacks/Store/Store";
+import Groups from "./src/stacks/Groups/Groups";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -67,6 +68,7 @@ const AppInside = () => {
         <AppStack.Screen name="PaymentInfo" component={PaymentInfo} />
         <AppStack.Screen name="Live" component={Live} />
         <AppStack.Screen name="Store" component={Store} />
+        <AppStack.Screen name="Groups" component={Groups} />
         <AppStack.Screen name="UploadAvatar" component={UploadAvatar} />
       </AppStack.Navigator>
     );

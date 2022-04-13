@@ -3,7 +3,7 @@ import {View, StyleSheet} from "react-native";
 import AppBar from "../../components/AppBar";
 import Screen from "../../components/Screen";
 import UserInfo from "./UserInfo";
-import TabBar from "./tabBar";
+import TabBar from "./TabBar";
 import Spacer from "../../components/Spacer";
 import Balance from "./Balance";
 import Button from "../../components/Button";

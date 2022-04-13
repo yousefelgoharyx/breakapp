@@ -49,7 +49,7 @@ const Home = ({navigation}) => {
   }
 
   return (
-    <Screen>
+    <Screen statusBarBg={colors.primary}>
       <Header />
       <ScrollView
         showsVerticalScrollIndicator={false}

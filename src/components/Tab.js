@@ -1,17 +1,9 @@
-import React, {useRef, useState, useEffect} from "react";
+import React, {useRef} from "react";
 import {Pressable, StyleSheet, useWindowDimensions, View} from "react-native";
 import Animated, {
-  FadeInDown,
-  FadeOutDown,
-  SlideInRight,
-  SlideOutRight,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  ZoomIn,
-  ZoomInDown,
-  ZoomOut,
-  ZoomOutDown,
 } from "react-native-reanimated";
 import colors from "../utils/colors";
 import StyledText from "./StyledText";
@@ -81,7 +73,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     paddingHorizontal: 8,
-    marginHorizontal: 24,
     borderRadius: 16,
   },
   tab: {

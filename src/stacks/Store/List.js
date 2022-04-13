@@ -22,7 +22,7 @@ const List = () => {
             key={item._id}
             name={item.name}
             price={item.price}
-            image={item.image}
+            image={item.avatar}
           />
         ))
       ) : (
@@ -34,7 +34,9 @@ const List = () => {
       );
   }
   return (
-    <ScrollView style={{flex: 1}}>
+    <ScrollView
+      style={{flex: 1}}
+      contentContainerStyle={{paddingHorizontal: 8}}>
       <Row>{content}</Row>
     </ScrollView>
   );

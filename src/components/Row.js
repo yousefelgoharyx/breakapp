@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    paddingHorizontal: 24,
     marginTop: 24,
   },
 });

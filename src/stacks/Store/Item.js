@@ -2,7 +2,7 @@ import React from "react";
 import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
 import StyledText from "../../components/StyledText";
 import UserBlance from "./Balance";
-const Item = ({onPress}) => {
+const Item = ({onPress, name, price, image}) => {
   return (
     <TouchableOpacity
       style={itemStyle.container}
@@ -17,12 +17,9 @@ const Item = ({onPress}) => {
           7 ايام
         </StyledText>
       </View>
-      <Image
-        source={require("../../assets/store/store.png")}
-        style={itemStyle.image}
-      />
-      <StyledText style={itemStyle.title}>قلوب ساطعة</StyledText>
-      <UserBlance amount={12} />
+      <Image source={{uri: image}} style={itemStyle.image} />
+      <StyledText style={itemStyle.title}>{name}</StyledText>
+      <UserBlance amount={price} />
     </TouchableOpacity>
   );
 };

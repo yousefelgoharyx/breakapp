@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {ImageBackground, ScrollView, StyleSheet, View} from "react-native";
+import {ScrollView, StyleSheet, View} from "react-native";
 import DarkFrame from "../../components/DarkFrame";
 import GoldFrame from "../../components/GoldFrame";
 import IceFrame from "../../components/IceFrame";
 import Person from "../../components/Person";
-import RankedPerson from "../../components/RankedPerson";
 import Screen from "../../components/Screen";
 import AppBar from "../../components/AppBar";
 import Tab from "../../components/Tab";
 import colors from "../../utils/colors";
 import {people, tabs} from "./ranksData";
-import StyledText from "../../components/StyledText";
 import RankedGroup from "../../components/RankedGroup";
 
 const personImage = require("../../assets/person.png");

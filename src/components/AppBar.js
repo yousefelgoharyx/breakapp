@@ -1,13 +1,15 @@
+import {useNavigation} from "@react-navigation/native";
 import React from "react";
 import {StyleSheet, TouchableOpacity, View} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import StyledText from "./StyledText";
-const AppBar = ({onBack, title}) => {
+const AppBar = ({onBack, title, hideBack}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.header}>
       <View style={styles.side}>
-        {onBack ? (
-          <TouchableOpacity onPress={onBack}>
+        {!hideBack ? (
+          <TouchableOpacity onPress={onBack ? onBack : navigation.goBack}>
             <Icon
               name="arrow-forward-outline"
               size={24}
