@@ -1,10 +1,13 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useNavigation} from "@react-navigation/native";
+
 const AuthContext = createContext(null);
 const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [onboarding, setOnboarding] = useState(true);
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function getUserData() {
@@ -27,9 +30,9 @@ const AuthProvider = ({children}) => {
     }
   };
   const logout = async () => {
+    setUser(null);
     await AsyncStorage.removeItem("user");
     await AsyncStorage.removeItem("token");
-    setUser(null);
   };
   return (
     <AuthContext.Provider

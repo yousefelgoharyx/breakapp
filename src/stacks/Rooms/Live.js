@@ -91,7 +91,7 @@ const Live = () => {
   const startCall = async () => {
     try {
       await rtcEngine.current?.joinChannel(
-        "0061c95a789c7f04acc8c7852ef280c5336IAAsDZR3pzq6avym13zf9MtYhSsf6seVwN1eJG8j5Tx2Fgx+f9gAAAAAEABg4SwUltlIYgEAAQCW2Uhi",
+        "0061c95a789c7f04acc8c7852ef280c5336IABq/+3ByQo9mJ/Cwdb0/3oK6205bJVR9l5LUvnr6/otkgx+f9gAAAAAEAAjgBf2AExbYgEAAQAATFti",
         "test",
         null,
         0,

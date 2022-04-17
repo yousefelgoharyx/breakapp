@@ -24,6 +24,8 @@ import {AuthProvider, useAuth} from "./src/context/auth";
 import UploadAvatar from "./src/stacks/Auth/UploadAvatar";
 import Store from "./src/stacks/Store/Store";
 import Groups from "./src/stacks/Groups/Groups";
+import {QueryClient, QueryClientProvider} from "react-query";
+import Logout from "./src/stacks/Logout/Logout";
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -70,6 +72,7 @@ const AppInside = () => {
         <AppStack.Screen name="Store" component={Store} />
         <AppStack.Screen name="Groups" component={Groups} />
         <AppStack.Screen name="UploadAvatar" component={UploadAvatar} />
+        <AppStack.Screen name="Logout" component={Logout} />
       </AppStack.Navigator>
     );
   else
@@ -85,12 +88,15 @@ const AppInside = () => {
 };
 const App = () => {
   // const isLoggedIn = storage.getString("auth_token");
+  const queryClient = new QueryClient();
   return (
-    <AuthProvider>
+    <QueryClientProvider client={queryClient}>
       <NavigationContainer theme={theme}>
-        <AppInside />
+        <AuthProvider>
+          <AppInside />
+        </AuthProvider>
       </NavigationContainer>
-    </AuthProvider>
+    </QueryClientProvider>
   );
 };
 

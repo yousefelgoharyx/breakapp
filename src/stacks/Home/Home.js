@@ -5,17 +5,15 @@ import {
   StyleSheet,
   useWindowDimensions,
   View,
-  ActivityIndicator,
 } from "react-native";
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
 import Screen from "../../components/Screen";
 import StyledText from "../../components/StyledText";
-import useGet from "../../hooks/useGet";
 import colors from "../../utils/colors";
 import HomeCat from "./HomeCat";
 import HomePerson from "./HomePerson";
-
+import useRooms from "./api/useRooms";
 const mobileImage = require("../../assets/home/mobile.png");
 const starsImage = require("../../assets/home/stars.png");
 const TennisImage = require("../../assets/home/tennis.png");
@@ -26,26 +24,13 @@ const HomeRow = ({children}) => <View style={styles.row}>{children}</View>;
 
 const Home = ({navigation}) => {
   const {width} = useWindowDimensions();
-  const GetOwner = useGet("/rooms");
 
-  let rooms = <Loader />;
-  if (GetOwner.isReady) {
-    rooms = (
-      <HomeRow>
-        {GetOwner.data.rooms.rooms.map(item => (
-          <HomePerson
-            key={item._id}
-            name={item.room_name}
-            isPrivate={item.private}
-            image={item.room_owner.avatar}
-            onPress={() => navigation.navigate("Live")}
-          />
-        ))}
-      </HomeRow>
-    );
+  const query = useRooms();
+  if (query.isLoading) {
+    return <Loader />;
   }
-  if (GetOwner.error) {
-    rooms = <StyledText>حدث خطا ما</StyledText>;
+  if (query.isError) {
+    return <StyledText>Error</StyledText>;
   }
 
   return (
@@ -76,7 +61,17 @@ const Home = ({navigation}) => {
             onPress={() => navigation.navigate("Rich")}
           />
         </View>
-        {rooms}
+        <HomeRow>
+          {query.data.rooms.rooms.map(item => (
+            <HomePerson
+              key={item._id}
+              name={item.room_name}
+              isPrivate={item.private}
+              image={item.room_owner.avatar}
+              onPress={() => navigation.navigate("Live")}
+            />
+          ))}
+        </HomeRow>
       </ScrollView>
     </Screen>
   );

@@ -4,6 +4,7 @@ import useGet from "../../hooks/useGet";
 import Loader from "../../components/Loader";
 import {View, Text} from "react-native";
 import List from "./List";
+import useCategories from "./api/useCategories";
 const Tab = createMaterialTopTabNavigator();
 
 const tabBarOptions = {
@@ -21,31 +22,26 @@ const tabBarOptions = {
   style: {backgroundColor: "transparent"},
 };
 const TabBar = () => {
-  const GetOwner = useGet("/store/category?page=1");
-  let categories = <Loader />;
-  if (GetOwner.isReady) {
-    let cats = GetOwner.data.result;
-    categories = (
-      <Tab.Navigator lazy tabBarOptions={tabBarOptions}>
-        {cats.map(category => (
-          <Tab.Screen
-            initialParams={{categoryId: category._id}}
-            key={category._id}
-            name={category.name}
-            component={List}
-          />
-        ))}
-      </Tab.Navigator>
-    );
+  const query = useCategories();
+  if (query.isLoading) {
+    return <Loader />;
   }
-  if (GetOwner.error) {
-    categories = (
-      <View>
-        <Text>Something went wrong</Text>
-      </View>
-    );
+  if (query.isError) {
+    return <StyledText>Error</StyledText>;
   }
-  return categories;
+
+  return (
+    <Tab.Navigator lazy tabBarOptions={tabBarOptions}>
+      {query.data.result.map(category => (
+        <Tab.Screen
+          initialParams={{categoryId: category._id}}
+          key={category._id}
+          name={category.name}
+          component={List}
+        />
+      ))}
+    </Tab.Navigator>
+  );
 };
 
 export default TabBar;
