@@ -19,13 +19,13 @@ export const requestAudioPermission = async () => {
     console.warn(err);
   }
 };
-export const useRequestAudio = () => {
+export const useRequestAudio = callback => {
   useEffect(() => {
     if (Platform.OS === "android") {
       // Request required permissions from Android
 
       requestAudioPermission().then(() => {
-        console.log("requested!");
+        callback();
       });
     }
   }, []);

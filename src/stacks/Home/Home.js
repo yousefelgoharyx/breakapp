@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import {
   Image,
   ScrollView,
@@ -14,6 +14,8 @@ import colors from "../../utils/colors";
 import HomeCat from "./HomeCat";
 import HomePerson from "./HomePerson";
 import useRooms from "./api/useRooms";
+import useGetToken from "./api/useGetToken";
+import {useAuth} from "../../context/auth";
 const mobileImage = require("../../assets/home/mobile.png");
 const starsImage = require("../../assets/home/stars.png");
 const TennisImage = require("../../assets/home/tennis.png");
@@ -24,14 +26,30 @@ const HomeRow = ({children}) => <View style={styles.row}>{children}</View>;
 
 const Home = ({navigation}) => {
   const {width} = useWindowDimensions();
-
+  const {user} = useAuth();
   const query = useRooms();
+  const tokenMutation = useGetToken();
+  const channel = useRef({name: null}).current;
+  useEffect(() => {
+    if (tokenMutation.data?.data) {
+      navigation.navigate("Live", {
+        token: tokenMutation.data.data.token,
+        channelName: channel.name,
+      });
+    }
+  }, [tokenMutation.isSuccess]);
+
   if (query.isLoading) {
     return <Loader />;
   }
   if (query.isError) {
     return <StyledText>Error</StyledText>;
   }
+
+  const handleJoinRoom = name => {
+    channel.name = name;
+    tokenMutation.mutate({name, uid: user._id});
+  };
 
   return (
     <Screen statusBarBg={colors.primary}>
@@ -64,11 +82,12 @@ const Home = ({navigation}) => {
         <HomeRow>
           {query.data.rooms.rooms.map(item => (
             <HomePerson
+              disabled={tokenMutation.isLoading}
               key={item._id}
               name={item.room_name}
               isPrivate={item.private}
               image={item.room_owner.avatar}
-              onPress={() => navigation.navigate("Live")}
+              onPress={() => handleJoinRoom(item.room_name)}
             />
           ))}
         </HomeRow>

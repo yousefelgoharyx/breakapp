@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import {useRoute} from "@react-navigation/native";
-import {ScrollView, View} from "react-native";
+import {ScrollView, View, TouchableOpacity} from "react-native";
 import Loader from "../../components/Loader";
 import Row from "../../components/Row";
 import StyledText from "../../components/StyledText";
 import Item from "./Item";
 import useItems from "./api/useItems";
+import colors from "../../utils/colors";
+import Pagination from "../../components/Pagination";
 
 const List = () => {
   const route = useRoute();
   const categoryId = route.params.categoryId;
   const query = useItems(categoryId);
-  // const GetOwner = useGet(`/store/getCategoryProducts/${categoryId}?page=1`);
   if (query.isLoading) {
     return <Loader />;
   }
@@ -43,6 +44,7 @@ const List = () => {
           />
         ))}
       </Row>
+      <Pagination pagesCount={5} onPageChange={page => console.log([page])} />
     </ScrollView>
   );
 };

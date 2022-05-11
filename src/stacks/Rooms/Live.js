@@ -24,6 +24,7 @@ import ChatActionsModal from "./ChatActionsModal";
 import RtcEngine from "react-native-agora";
 import {Button} from "react-native";
 import {useRequestAudio} from "../../hooks/useAudioPermission";
+import {useAuth} from "../../context/auth";
 const users = [
   {
     id: 1,
@@ -51,18 +52,25 @@ const users = [
     label: "10K",
   },
 ];
-const Live = () => {
+const Live = ({route}) => {
   const userModalRef = useRef(null);
   const usersModalRef = useRef(null);
   const luckBagModalRef = useRef(null);
   const actionsModalRef = useRef(null);
   const chatActionModalRef = useRef(null);
-  useRequestAudio();
   const rtcEngine = useRef(null);
-
+  const {user} = useAuth();
   const [callState, setCallState] = useState({
     joined: false,
   });
+
+  const token = route.params.token;
+  const channel = route.params.channelName;
+
+  useRequestAudio(() => {
+    initAgora();
+  });
+
   const initAgora = useCallback(async () => {
     rtcEngine.current = await RtcEngine.create(
       "1c95a789c7f04acc8c7852ef280c5336",
@@ -82,30 +90,29 @@ const Live = () => {
         console.log("JoinChannelSuccess", channel, uid, elapsed);
       },
     );
-  }, []);
 
-  useEffect(() => {
-    initAgora();
-  }, []);
-
-  const startCall = async () => {
     try {
+      console.log("______________________");
+      console.log(token, channel);
       await rtcEngine.current?.joinChannel(
-        "0061c95a789c7f04acc8c7852ef280c5336IABq/+3ByQo9mJ/Cwdb0/3oK6205bJVR9l5LUvnr6/otkgx+f9gAAAAAEAAjgBf2AExbYgEAAQAATFti",
-        "test",
+        token,
+        channel,
         null,
-        0,
+        Number(user._id),
       );
       setCallState({...callState, joined: true});
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
-  const endCall = async () => {
-    await rtcEngine.current?.leaveChannel();
-    setCallState({...callState, joined: false});
-  };
+  const startCall = async () => {};
+  const endCall = async () => {};
+  useEffect(() => {
+    return () => {
+      rtcEngine.current?.leaveChannel();
+    };
+  }, []);
   const openUserModal = () => userModalRef.current?.present();
   const openUsersModal = () => usersModalRef.current?.present();
   const openLuckBagModal = () => luckBagModalRef.current?.present();

@@ -4,7 +4,10 @@ import {useNavigation} from "@react-navigation/native";
 
 const AuthContext = createContext(null);
 const AuthProvider = ({children}) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    user: null,
+    token: null,
+  });
   const [loading, setLoading] = useState(true);
   const [onboarding, setOnboarding] = useState(true);
   const navigation = useNavigation();
@@ -20,19 +23,28 @@ const AuthProvider = ({children}) => {
     }
     getUserData();
   }, []);
+
   const login = async (user, token) => {
     try {
       await AsyncStorage.setItem("user", JSON.stringify(user));
       await AsyncStorage.setItem("token", token);
       setUser({...user, token});
+      navigation.navigate("MainTabs");
     } catch {
-      setUser(null);
+      setUser({
+        user: null,
+        token: null,
+      });
     }
   };
   const logout = async () => {
-    setUser(null);
     await AsyncStorage.removeItem("user");
     await AsyncStorage.removeItem("token");
+    setUser({
+      user: null,
+      token: null,
+    });
+    navigation.navigate("Auth");
   };
   return (
     <AuthContext.Provider

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, {useState} from "react";
 import {View} from "react-native";
 import Snackbar from "react-native-snackbar";
@@ -8,8 +9,7 @@ import useMethod from "../../hooks/useMethod";
 
 const options = {
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   },
 };
 const UploadAvatar = ({navigation}) => {
@@ -27,15 +27,21 @@ const UploadAvatar = ({navigation}) => {
     try {
       const avatarData = new FormData();
       const imageObject = {
-        src: image[0].uri,
+        uri: image[0].uri,
         name: image[0].fileName,
-        type: "file",
+        type: image[0].type,
       };
+      console.log(image[0]);
       avatarData.append("avatar", imageObject);
-      const response = await PostOwner.post("/users/uploadAvatar", avatarData);
+      const response = await axios.post(
+        "https://break-app-123.herokuapp.com/api/v1/users/uploadAvatar",
+        avatarData,
+        {headers: {"Content-Type": "miltipart/form-data"}},
+      );
+      // const response = await PostOwner.post("/users/uploadAvatar", avatarData);
       console.log(response);
     } catch (error) {
-      console.log("err", error);
+      console.log("err", error.message);
       Snackbar.show({
         text: "حدث خطا ما",
         rtl: true,

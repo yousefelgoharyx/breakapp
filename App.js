@@ -73,6 +73,11 @@ const AppInside = () => {
         <AppStack.Screen name="Groups" component={Groups} />
         <AppStack.Screen name="UploadAvatar" component={UploadAvatar} />
         <AppStack.Screen name="Logout" component={Logout} />
+
+        <AppStack.Screen name="Auth" component={Auth} />
+        <AppStack.Screen name="Login" component={Login} />
+        <AppStack.Screen name="CreateUser" component={CreateUser} />
+        <AppStack.Screen name="ForgotPassword" component={ForgotPassword} />
       </AppStack.Navigator>
     );
   else

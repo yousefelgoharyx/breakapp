@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 24,
-    paddingVertical: 8,
+    paddingVertical: 12,
     alignItems: "center",
+    backgroundColor: "#151515",
   },
   buttonsWrapper: {
     flexDirection: "row",

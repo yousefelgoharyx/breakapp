@@ -31,7 +31,7 @@ const Profile = () => {
       <AppBar title="الملف الشخصي" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProfileHeader
-          name={user.name}
+          name={user?.name}
           id="125545"
           profileImage={require("../../assets/avatar.jpg")}
         />

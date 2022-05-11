@@ -15,8 +15,6 @@ const levelIcon = require("../../assets/profile/level.png");
 
 const Tabs = ({user}) => {
   const navigation = useNavigation();
-  const {logout} = useAuth();
-
   const handleShare = () => {
     Share.share(
       {
@@ -49,7 +47,11 @@ const Tabs = ({user}) => {
         iconSource={levelIcon}
         leftText={`Lv ${user.level}`}
       />
-      <ProfileSetting title="الاوسمة" iconSource={awardIcon} />
+      <ProfileSetting
+        title="الاوسمة"
+        iconSource={awardIcon}
+        onPress={() => navigation.navigate("UploadAvatar")}
+      />
       <ProfileSetting
         title="دعوة الاصدقاء"
         iconSource={inviteIcon}

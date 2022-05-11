@@ -1,13 +1,13 @@
 import React from "react";
 import {Image, StyleSheet, TouchableOpacity, View} from "react-native";
-import Flag from "react-native-country-flag";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AbsoluteView from "../../components/AbsoluteView";
 import StyledText from "../../components/StyledText";
-const HomePerson = ({onPress, image, isPrivate, name}) => {
+const HomePerson = ({onPress, image, isPrivate, name, disabled}) => {
   return (
     <TouchableOpacity
-      style={personStyles.container}
+      disabled={disabled}
+      style={[personStyles.container, {opacity: disabled ? 0.5 : 1}]}
       activeOpacity={0.7}
       onPress={onPress}>
       <View style={personStyles.imageWrapper}>
