@@ -6,7 +6,7 @@ import {
 import React from "react";
 import {I18nManager, LogBox} from "react-native";
 import Auth from "./src/stacks/Auth/Auth";
-import CreateGroup from "./src/stacks/Auth/CreateGroup";
+import CreateGroup from "./src/stacks/Groups/CreateGroup";
 import ForgotPassword from "./src/stacks/Auth/ForgotPassword";
 import Login from "./src/stacks/Auth/Login";
 import Main from "./src/stacks/Main/Main";

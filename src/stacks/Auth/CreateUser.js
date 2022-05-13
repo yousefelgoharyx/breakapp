@@ -32,8 +32,6 @@ const CreateUser = ({navigation}) => {
     defaultValue: "Egypt",
   });
 
-  const toUploadAvatar = () => navigation.navigate("UploadAvatar");
-
   const regsier = async data => {
     console.log(data);
     setLoading(true);

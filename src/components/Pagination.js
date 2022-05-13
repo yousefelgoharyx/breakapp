@@ -11,7 +11,10 @@ const PaginationButton = ({number, active, onPress, disabled, icon}) => {
       activeOpacity={0.5}
       style={[
         styles.button,
-        {backgroundColor: active ? colors.primary : "#333"},
+        {
+          backgroundColor: active ? colors.primary : "#333",
+          opacity: disabled ? 0 : 1,
+        },
       ]}>
       {icon ? icon : <StyledText bold>{number}</StyledText>}
     </TouchableOpacity>
@@ -34,24 +37,8 @@ const Pagination = ({pagesCount, onPageChange = () => {}}) => {
         icon={<Icon name="chevron-right" size={32} />}
         onPress={handleBack}
       />
-      {/* {Array.from(Array(pagesCount).keys()).map(number => (
-        <PaginationButton
-          onPress={() => setPage(number + 1)}
-          key={number + 1}
-          number={number + 1}
-          active={number + 1 === page}
-        />
-      ))} */}
-      <View
-        style={{
-          width: 48,
-          height: 48,
-          alignItems: "center",
-          justifyContent: "center",
-          marginRight: "2%",
-          backgroundColor: colors.primary,
-          borderRadius: 24,
-        }}>
+
+      <View style={styles.pageNumber}>
         <StyledText bold>{page}</StyledText>
       </View>
       <PaginationButton
@@ -79,6 +66,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 24,
     marginRight: "2%",
+  },
+  pageNumber: {
+    width: 48,
+    height: 48,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: "2%",
+    backgroundColor: colors.primary,
+    borderRadius: 24,
   },
 });
 export default Pagination;

@@ -31,17 +31,20 @@ const UploadAvatar = ({navigation}) => {
         name: image[0].fileName,
         type: image[0].type,
       };
-      console.log(image[0]);
-      avatarData.append("avatar", imageObject);
+      try {
+        avatarData.append("avatar", imageObject);
+      } catch (error) {
+        console.log(error);
+      }
+
       const response = await axios.post(
         "https://break-app-123.herokuapp.com/api/v1/users/uploadAvatar",
         avatarData,
         {headers: {"Content-Type": "miltipart/form-data"}},
       );
-      // const response = await PostOwner.post("/users/uploadAvatar", avatarData);
       console.log(response);
     } catch (error) {
-      console.log("err", error.message);
+      console.log("err", error.response.data);
       Snackbar.show({
         text: "حدث خطا ما",
         rtl: true,
