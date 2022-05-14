@@ -25,7 +25,7 @@ const Profile = () => {
   const query = useProfile();
   if (query.isLoading) return <Loader />;
   if (query.isError) return <ProfileError logout={logout} />;
-
+  console.log(user);
   return (
     <Screen bg="#262626" statusBarBg="#262626">
       <AppBar title="الملف الشخصي" />
@@ -33,7 +33,7 @@ const Profile = () => {
         <ProfileHeader
           name={user?.name}
           id="125545"
-          profileImage={require("../../assets/avatar.jpg")}
+          profileImage={{uri: user?.avatar}}
         />
         <Stats user={query.data[0]} />
         <Divider marginV={32} />

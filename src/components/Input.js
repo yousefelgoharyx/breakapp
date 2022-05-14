@@ -60,6 +60,7 @@ const Input = ({
           onChangeText={field.onChange}
           secureTextEntry={isSecure}
           value={field.value}
+          multiline
           {...rest}
         />
       </Animated.View>

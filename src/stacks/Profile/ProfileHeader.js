@@ -3,8 +3,7 @@ import {Image, StyleSheet, View} from "react-native";
 import StyledText from "../../components/StyledText";
 
 const idIcon = require("../../assets/profile/id.png");
-const profileImage = require("../../assets/avatar.jpg");
-const ProfileHeader = ({name, id}) => {
+const ProfileHeader = ({name, id, profileImage}) => {
   return (
     <View>
       <View style={styles.imageWrapper}>
@@ -31,6 +30,7 @@ const styles = StyleSheet.create({
     height: 96,
     alignSelf: "center",
     marginTop: 16,
+    backgroundColor: "#ccc",
   },
   image: {
     width: 96,

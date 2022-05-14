@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import Snackbar from "react-native-snackbar";
 import AuthFlowView from "../../components/AuthFlowView";
@@ -9,8 +9,10 @@ import Page from "../../components/Page";
 import Screen from "../../components/Screen";
 import Spacer from "../../components/Spacer";
 import useCreateGroup from "./api/useCreateGroup";
-
+import upload_image from "../../utils/upload_image";
 const CreateGroup = ({navigation}) => {
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -20,12 +22,16 @@ const CreateGroup = ({navigation}) => {
   const groups = useCreateGroup();
 
   const onSubmit = async data => {
+    if (!image) return Snackbar.show({text: err.msg, fontFamily: "Cairo"});
     try {
+      setLoading(true);
+      const imageResponse = await upload_image(image);
       await groups.mutateAsync({
         name: data.name,
         description: data.about,
-        avatar: "avatar",
+        avatar: imageResponse.avatarUrl,
       });
+      setLoading(false);
       Snackbar.show({text: "تم انشاء المجموعة بنجاح", fontFamily: "Cairo"});
       navigation.navigate("Groups");
     } catch (e) {
@@ -39,7 +45,7 @@ const CreateGroup = ({navigation}) => {
     <Screen bg="#000" statusBarBg="#000">
       <Page effect onBack={navigation.goBack} title="انشاء قبيلة">
         <AuthFlowView>
-          <ImageUpload onImageChange={images => console.log(images[0].uri)} />
+          <ImageUpload onImageChange={images => setImage(images[0])} />
           <Spacer space={32} />
           <Input
             rules={{required: true}}
@@ -62,7 +68,7 @@ const CreateGroup = ({navigation}) => {
             invalid={errors.about}
           />
           <Button
-            loading={groups.isLoading}
+            loading={loading}
             onPress={handleSubmit(onSubmit)}
             title="انشاء"
           />

@@ -26,22 +26,24 @@ const UploadAvatar = ({navigation}) => {
 
     try {
       const avatarData = new FormData();
-      const imageObject = {
+      console.log(image[0]);
+      avatarData.append("avatar", {
         uri: image[0].uri,
         name: image[0].fileName,
         type: image[0].type,
-      };
-      try {
-        avatarData.append("avatar", imageObject);
-      } catch (error) {
-        console.log(error);
-      }
-
-      const response = await axios.post(
+      });
+      const json_response = await fetch(
         "https://break-app-123.herokuapp.com/api/v1/users/uploadAvatar",
-        avatarData,
-        {headers: {"Content-Type": "miltipart/form-data"}},
+        {
+          method: "post",
+          body: avatarData,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        },
       );
+      const response = await json_response.json();
       console.log(response);
     } catch (error) {
       console.log("err", error.response.data);
