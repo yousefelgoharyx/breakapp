@@ -3,9 +3,11 @@ package com.breakapp;
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
+import org.devio.rn.splashscreen.SplashScreen;
 public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    SplashScreen.show(this);
     super.onCreate(null);
     I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
     sharedI18nUtilInstance.forceRTL(this,true);
