@@ -3,6 +3,8 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
+
+import SplashScreen from "react-native-splash-screen";
 import React from "react";
 import {I18nManager, LogBox, PermissionsAndroid} from "react-native";
 import Auth from "./src/stacks/Auth/Auth";
@@ -49,6 +51,9 @@ const stackOptions = {
 
 const AppInside = () => {
   const {user, loading, onboarding} = useAuth();
+  React.useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   if (loading) return null;
   if (onboarding)
     return (

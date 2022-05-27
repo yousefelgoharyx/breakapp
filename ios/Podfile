@@ -14,6 +14,8 @@ target 'breakapp' do
 
   pod 'react-native-agora', :path => '../node_modules/react-native-agora'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'breakappTests' do
     inherit! :complete
     # Pods for testing

@@ -50,7 +50,6 @@ const CreateUser = ({navigation}) => {
         avatar: avatarUrl,
       });
       await login(response.data.info, response.data.auth_token);
-      navigation.navigate("UploadAvatar");
       setLoading(false);
     } catch (e) {
       Snackbar.show({
