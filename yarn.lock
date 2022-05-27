@@ -5698,10 +5698,10 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.0.0.tgz#026f6c4a27dbe33bf4a35655b9e1327c4e55e3f5"
   integrity sha512-yUcBYdBBbo3QiPsgYDcfQcIkGZHfxOaoE6HLSnr1sPzMhdyxusbfKOSUbSd/ocGi32dxcj366PsTj+5oggeKKw==
 
-react-native-agora@^3.5.3:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/react-native-agora/-/react-native-agora-3.5.3.tgz#6d091465cafb80e6989cd09e76a2edd07f4447ae"
-  integrity sha512-erkLr45JHe1ktipE2b/v9EoOq7uzX7LrRPKVYNAvLsgqlQvspV7yYhGSBjN+TJLYAbx85YI7Udoj8IpRG+RfDw==
+react-native-agora@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-agora/-/react-native-agora-3.7.0.tgz#8bc5122792a78c3a6a31a4e183aa12fb3aec3aea"
+  integrity sha512-ZwZ/7byDyJ2iu87erhbYswvvdW7SwlWt195Cp8XMluvNunFb7pIVZyWxqcRfxc9XGN/CyrcP3/CaWpNJAFpXLg==
 
 react-native-autogrow-textinput@^5.4.0:
   version "5.4.0"

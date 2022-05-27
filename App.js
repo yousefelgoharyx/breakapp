@@ -4,7 +4,7 @@ import {
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 import React from "react";
-import {I18nManager, LogBox} from "react-native";
+import {I18nManager, LogBox, PermissionsAndroid} from "react-native";
 import Auth from "./src/stacks/Auth/Auth";
 import CreateGroup from "./src/stacks/Groups/CreateGroup";
 import ForgotPassword from "./src/stacks/Auth/ForgotPassword";
@@ -22,7 +22,7 @@ import PaymentInfo from "./src/stacks/Payment/PaymentInfo";
 import CreateUser from "./src/stacks/Auth/CreateUser";
 import {AuthProvider, useAuth} from "./src/context/auth";
 import UploadAvatar from "./src/stacks/Auth/UploadAvatar";
-import Store from "./src/stacks/Store/Store";
+import Store from "./src/stacks/Store/store";
 import Groups from "./src/stacks/Groups/Groups";
 import {QueryClient, QueryClientProvider} from "react-query";
 import Logout from "./src/stacks/Logout/Logout";
@@ -86,8 +86,26 @@ const AppInside = () => {
   );
 };
 const App = () => {
+  const requestCameraAndAudioPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+      ]);
+      if (
+        granted["android.permission.RECORD_AUDIO"] ===
+        PermissionsAndroid.RESULTS.GRANTED
+      ) {
+        console.log("You can use the mic");
+      } else {
+        console.log("Permission denied");
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
   // const isLoggedIn = storage.getString("auth_token");
   const queryClient = new QueryClient();
+  requestCameraAndAudioPermission();
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer theme={theme}>

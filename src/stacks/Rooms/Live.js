@@ -23,8 +23,12 @@ import LuckBag from "./LuckBag";
 import ChatActionsModal from "./ChatActionsModal";
 import RtcEngine from "react-native-agora";
 import {Button} from "react-native";
-import {useRequestAudio} from "../../hooks/useAudioPermission";
+import {
+  requestAudioPermission,
+  useRequestAudio,
+} from "../../hooks/useAudioPermission";
 import {useAuth} from "../../context/auth";
+import requestCameraAndAudioPermission from "agora-rn-uikit/src/permission";
 const users = [
   {
     id: 1,
@@ -63,7 +67,14 @@ const Live = ({route}) => {
   const [callState, setCallState] = useState({
     joined: false,
   });
-
+  const [openMicrophone, setOpenMicrophone] = useState(false);
+  const [enableSpeaker, setEnableSpeaker] = useState(false);
+  if (Platform.OS === "android") {
+    // Request required permissions from Android
+    requestAudioPermission().then(() => {
+      console.log("requested!");
+    });
+  }
   const token = route.params.token;
   const channel = route.params.channelName;
 
@@ -93,7 +104,7 @@ const Live = ({route}) => {
 
     try {
       console.log("______________________");
-      console.log(token, channel);
+      console.log(token, "token , channel", channel);
       await rtcEngine.current?.joinChannel(
         token,
         channel,
@@ -106,8 +117,34 @@ const Live = ({route}) => {
     }
   }, []);
 
-  const startCall = async () => {};
-  const endCall = async () => {};
+  switchMicrophone = () => {
+    rtcEngine.current
+      ?.enableLocalAudio(!openMicrophone)
+      .then(() => {
+        setOpenMicrophone(!openMicrophone);
+      })
+      .catch(err => {
+        console.warn("enableLocalAudio", err);
+      });
+  };
+  switchSpeakerphone = () => {
+    this._engine
+      ?.setEnableSpeakerphone(!enableSpeaker)
+      .then(() => {
+        setEnableSpeaker(!enableSpeaker);
+        console.log("setEnableSpeakerphone", !enableSpeaker);
+      })
+      .catch(err => {
+        console.warn("setEnableSpeakerphone", err);
+      });
+  };
+  const startCall = async () => {
+    // switchMicrophone();
+    switchSpeakerphone();
+  };
+  const endCall = async () => {
+    rtcEngine.current?.leaveChannel();
+  };
   useEffect(() => {
     return () => {
       rtcEngine.current?.leaveChannel();
