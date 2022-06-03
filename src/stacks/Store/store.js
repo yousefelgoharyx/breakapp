@@ -1,13 +1,13 @@
-import React from "react";
-import {View, StyleSheet} from "react-native";
-import AppBar from "../../components/AppBar";
-import Screen from "../../components/Screen";
-import UserInfo from "./userInfo";
-import TabBar from "./tabBar";
-import Spacer from "../../components/Spacer";
-import Balance from "./Balance";
-import Button from "../../components/Button";
-import colors from "../../utils/colors";
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import AppBar from '../../components/AppBar';
+import Screen from '../../components/Screen';
+import UserInfo from './UserInfo';
+import TabBar from './TabBar';
+import Spacer from '../../components/Spacer';
+import Balance from './Balance';
+import Button from '../../components/Button';
+import colors from '../../utils/colors';
 
 const Store = ({navigation}) => {
   return (
@@ -29,16 +29,16 @@ const Store = ({navigation}) => {
 
 const styles = StyleSheet.create({
   storeControl: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     padding: 24,
     paddingVertical: 12,
-    alignItems: "center",
-    backgroundColor: "#151515",
+    alignItems: 'center',
+    backgroundColor: '#151515',
   },
   buttonsWrapper: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 });
 export default Store;
