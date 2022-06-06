@@ -14,11 +14,7 @@ import colors from '../../utils/colors';
 import HomeCat from './HomeCat';
 import HomePerson from './HomePerson';
 import useRooms from './api/useRooms';
-<<<<<<< HEAD
-import useGetToken from './api/useGetToken';
-=======
 import useGetVoiceToken from './api/useGetVoiceToken';
->>>>>>> 4c1c8216a0f430768518dd75c48e2aacd97977f7
 import {useAuth} from '../../context/auth';
 const mobileImage = require('../../assets/home/mobile.png');
 const starsImage = require('../../assets/home/stars.png');
@@ -35,15 +31,9 @@ const Home = ({navigation}) => {
   const voiceTokenMutation = useGetVoiceToken();
   const channel = useRef({name: null}).current;
   useEffect(() => {
-<<<<<<< HEAD
-    if (tokenMutation.data?.data) {
-      navigation.navigate('Live', {
-        token: tokenMutation.data.data.token,
-=======
     if (voiceTokenMutation.data?.data) {
       navigation.navigate('Live', {
         voiceToken: voiceTokenMutation.data.data.token,
->>>>>>> 4c1c8216a0f430768518dd75c48e2aacd97977f7
         channelName: channel.name,
       });
     }
