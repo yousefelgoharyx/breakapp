@@ -14,7 +14,11 @@ import colors from '../../utils/colors';
 import HomeCat from './HomeCat';
 import HomePerson from './HomePerson';
 import useRooms from './api/useRooms';
+<<<<<<< HEAD
 import useGetToken from './api/useGetToken';
+=======
+import useGetVoiceToken from './api/useGetVoiceToken';
+>>>>>>> 4c1c8216a0f430768518dd75c48e2aacd97977f7
 import {useAuth} from '../../context/auth';
 const mobileImage = require('../../assets/home/mobile.png');
 const starsImage = require('../../assets/home/stars.png');
@@ -28,16 +32,22 @@ const Home = ({navigation}) => {
   const {width} = useWindowDimensions();
   const {user} = useAuth();
   const query = useRooms();
-  const tokenMutation = useGetToken();
+  const voiceTokenMutation = useGetVoiceToken();
   const channel = useRef({name: null}).current;
   useEffect(() => {
+<<<<<<< HEAD
     if (tokenMutation.data?.data) {
       navigation.navigate('Live', {
         token: tokenMutation.data.data.token,
+=======
+    if (voiceTokenMutation.data?.data) {
+      navigation.navigate('Live', {
+        voiceToken: voiceTokenMutation.data.data.token,
+>>>>>>> 4c1c8216a0f430768518dd75c48e2aacd97977f7
         channelName: channel.name,
       });
     }
-  }, [tokenMutation.isSuccess]);
+  }, [voiceTokenMutation.isSuccess]);
 
   if (query.isLoading) {
     return <Loader />;
@@ -48,7 +58,7 @@ const Home = ({navigation}) => {
 
   const handleJoinRoom = name => {
     channel.name = name;
-    tokenMutation.mutate({name, uid: user._id});
+    voiceTokenMutation.mutate({name, uid: user._id});
   };
 
   return (
@@ -65,7 +75,7 @@ const Home = ({navigation}) => {
           <HomeCat
             src={mobileImage}
             title="ترتيب الغرف"
-            onPress={() => navigation.navigate('Test')}
+            onPress={() => navigation.navigate('GroupRanks')}
           />
           <HomeCat
             src={starsImage}
@@ -82,7 +92,7 @@ const Home = ({navigation}) => {
         <HomeRow>
           {query.data.rooms.rooms.map(item => (
             <HomePerson
-              disabled={tokenMutation.isLoading}
+              disabled={voiceTokenMutation.isLoading}
               key={item._id}
               name={item.room_name}
               isPrivate={item.private}
