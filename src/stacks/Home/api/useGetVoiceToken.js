@@ -1,7 +1,7 @@
-import {useMutation, useQuery} from "react-query";
-import useAxios from "../../../hooks/useAxios";
+import {useMutation, useQuery} from 'react-query';
+import useAxios from '../../../hooks/useAxios';
 
-const useGetToken = () => {
+const useGetVoiceToken = () => {
   const axios = useAxios();
 
   const mutation = useMutation(room => {
@@ -15,4 +15,4 @@ const useGetToken = () => {
   return mutation;
 };
 
-export default useGetToken;
+export default useGetVoiceToken;
