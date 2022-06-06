@@ -4,7 +4,7 @@ import ChatBar from '../../components/ChatBar';
 import ChatMessage from '../../components/ChatMessage';
 import Spacer from '../../components/Spacer';
 
-const Chat = ({onMicPress}) => {
+const Chat = ({onMicPress, micStatus}) => {
   return (
     <>
       <ScrollView
@@ -26,7 +26,7 @@ const Chat = ({onMicPress}) => {
         <ChatMessage source={require('../../assets/person.png')} />
         <Spacer />
       </ScrollView>
-      <ChatBar onMicPress={onMicPress} />
+      <ChatBar onMicPress={onMicPress} micStatus={micStatus} />
     </>
   );
 };

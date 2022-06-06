@@ -120,7 +120,6 @@ const Live = ({route}) => {
     try {
       await rtcEngine.current?.enableLocalAudio(!openMicrophone);
       setOpenMicrophone(!openMicrophone);
-      console.log('Mic is', !openMicrophone);
     } catch {
       console.log('Error while switching mic');
     }
@@ -200,6 +199,7 @@ const Live = ({route}) => {
           channelName={channelName}
           chatToken={chatToken}
           onMicPress={switchMicrophone}
+          micStatus={openMicrophone}
         />
 
         <UserModal ref={userModalRef} />

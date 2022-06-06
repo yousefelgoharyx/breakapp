@@ -15,10 +15,12 @@ import Menu from '../icons/Menu';
 import AbsoluteView from './AbsoluteView';
 import Spacer from './Spacer';
 
-const ChatBar = ({onShowMenu, onMicPress}) => {
+const ChatBar = ({onShowMenu, onMicPress, micStatus}) => {
   const [height, setHeight] = React.useState(40);
   const [open, setOpen] = React.useState(false);
   const inputRef = React.useRef(null);
+  console.log('micStatus', micStatus);
+
   return (
     <>
       <View style={styles.container}>
@@ -31,7 +33,11 @@ const ChatBar = ({onShowMenu, onMicPress}) => {
           </View>
         </AbsoluteView>
         <TouchableOpacity style={styles.iconContainer} onPress={onMicPress}>
-          <Icon name="mic" size={24} color="#fff" />
+          {micStatus ? (
+            <Icon name="mic" size={24} color="#fff" />
+          ) : (
+            <Icon name="mic-off" size={24} color="#fff" />
+          )}
         </TouchableOpacity>
         <Spacer space={8} />
         <View style={styles.inputContainer}>
