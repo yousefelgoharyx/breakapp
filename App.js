@@ -1,33 +1,34 @@
-import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {
   createStackNavigator,
   CardStyleInterpolators,
-} from "@react-navigation/stack";
+} from '@react-navigation/stack';
 
-import SplashScreen from "react-native-splash-screen";
-import React from "react";
-import {I18nManager, LogBox, PermissionsAndroid} from "react-native";
-import Auth from "./src/stacks/Auth/Auth";
-import CreateGroup from "./src/stacks/Groups/CreateGroup";
-import ForgotPassword from "./src/stacks/Auth/ForgotPassword";
-import Login from "./src/stacks/Auth/Login";
-import Main from "./src/stacks/Main/Main";
-import OnBoarding from "./src/stacks/Splash/OnBoarding";
-import Stars from "./src/stacks/Ranks/Stars";
-import Rich from "./src/stacks/Ranks/Rich";
-import GroupRanks from "./src/stacks/Ranks/GroupRanks";
-import Wallet from "./src/stacks/Payment/Wallet";
-import Done from "./src/stacks/Payment/Done";
-import PaymentMethod from "./src/stacks/Payment/PaymentMethod";
-import Live from "./src/stacks/Rooms/Live";
-import PaymentInfo from "./src/stacks/Payment/PaymentInfo";
-import CreateUser from "./src/stacks/Auth/CreateUser";
-import {AuthProvider, useAuth} from "./src/context/auth";
-import UploadAvatar from "./src/stacks/Auth/UploadAvatar";
-import Store from "./src/stacks/Store/store";
-import Groups from "./src/stacks/Groups/Groups";
-import {QueryClient, QueryClientProvider} from "react-query";
-import Logout from "./src/stacks/Logout/Logout";
+import SplashScreen from 'react-native-splash-screen';
+import React from 'react';
+import {I18nManager, LogBox, PermissionsAndroid} from 'react-native';
+import Auth from './src/stacks/Auth/Auth';
+import CreateGroup from './src/stacks/Groups/CreateGroup';
+import ForgotPassword from './src/stacks/Auth/ForgotPassword';
+import Login from './src/stacks/Auth/Login';
+import Main from './src/stacks/Main/Main';
+import OnBoarding from './src/stacks/Splash/OnBoarding';
+import Stars from './src/stacks/Ranks/Stars';
+import Rich from './src/stacks/Ranks/Rich';
+import GroupRanks from './src/stacks/Ranks/GroupRanks';
+import Wallet from './src/stacks/Payment/Wallet';
+import Done from './src/stacks/Payment/Done';
+import PaymentMethod from './src/stacks/Payment/PaymentMethod';
+import Live from './src/stacks/Rooms/Live';
+import PaymentInfo from './src/stacks/Payment/PaymentInfo';
+import CreateUser from './src/stacks/Auth/CreateUser';
+import {AuthProvider, useAuth} from './src/context/auth';
+import UploadAvatar from './src/stacks/Auth/UploadAvatar';
+import Store from './src/stacks/Store/store';
+import Groups from './src/stacks/Groups/Groups';
+import Test from './src/stacks/Test/Test';
+import {QueryClient, QueryClientProvider} from 'react-query';
+import Logout from './src/stacks/Logout/Logout';
 I18nManager.forceRTL(true);
 I18nManager.allowRTL(true);
 const AppStack = createStackNavigator();
@@ -36,7 +37,7 @@ const theme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    background: "#000",
+    background: '#000',
   },
 };
 
@@ -77,6 +78,7 @@ const AppInside = () => {
         <AppStack.Screen name="Store" component={Store} />
         <AppStack.Screen name="Groups" component={Groups} />
         <AppStack.Screen name="UploadAvatar" component={UploadAvatar} />
+        <AppStack.Screen name="Test" component={Test} />
         <AppStack.Screen name="Logout" component={Logout} />
       </AppStack.Navigator>
     );
@@ -97,12 +99,12 @@ const App = () => {
         PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
       ]);
       if (
-        granted["android.permission.RECORD_AUDIO"] ===
+        granted['android.permission.RECORD_AUDIO'] ===
         PermissionsAndroid.RESULTS.GRANTED
       ) {
-        console.log("You can use the mic");
+        console.log('You can use the mic');
       } else {
-        console.log("Permission denied");
+        console.log('Permission denied');
       }
     } catch (err) {
       console.warn(err);
