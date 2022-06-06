@@ -53,8 +53,9 @@ const APP_ID = '1c95a789c7f04acc8c7852ef280c5336';
 const Live = ({route}) => {
   // Passed data
   const voiceToken = route.params.voiceToken;
-  const chatToken = route.params.chatToken;
+  const chatToken = route.params.voiceToken;
   const channelName = route.params.channelName;
+  const channelId = route.params.channelId;
 
   const userModalRef = useRef(null);
   const usersModalRef = useRef(null);
@@ -200,6 +201,7 @@ const Live = ({route}) => {
           chatToken={chatToken}
           onMicPress={switchMicrophone}
           micStatus={openMicrophone}
+          channelId={channelId}
         />
 
         <UserModal ref={userModalRef} />

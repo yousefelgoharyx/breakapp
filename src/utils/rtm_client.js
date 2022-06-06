@@ -9,6 +9,7 @@ export default class RtmAdapter extends EventEmitter {
     super();
     this.uid = null;
     this.client = new RtmEngine();
+    this.instance = null;
     const events = [
       'tokenExpired',
       'remoteInvitationRefused',
@@ -38,11 +39,11 @@ export default class RtmAdapter extends EventEmitter {
   }
 
   async login(uid) {
-    await this.client.createClient('14cc34ef77774273aaaba21749ac950c');
+    this.instance = await RtmEngine.createInstance(
+      '14cc34ef77774273aaaba21749ac950c',
+    );
     this.uid = uid;
-    return this.client.login({
-      uid: this.uid,
-    });
+    return this.instance;
   }
 
   async logout() {

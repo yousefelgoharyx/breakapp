@@ -15,11 +15,10 @@ import Menu from '../icons/Menu';
 import AbsoluteView from './AbsoluteView';
 import Spacer from './Spacer';
 
-const ChatBar = ({onShowMenu, onMicPress, micStatus}) => {
+const ChatBar = ({onShowMenu, onMicPress, micStatus, onChangeText, value}) => {
   const [height, setHeight] = React.useState(40);
   const [open, setOpen] = React.useState(false);
   const inputRef = React.useRef(null);
-  console.log('micStatus', micStatus);
 
   return (
     <>
@@ -56,6 +55,8 @@ const ChatBar = ({onShowMenu, onMicPress, micStatus}) => {
             textAlignVertical="center"
             multiline={true}
             ref={inputRef}
+            value={value}
+            onChangeText={onChangeText}
           />
         </View>
         <Spacer space={8} />

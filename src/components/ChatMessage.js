@@ -6,12 +6,14 @@ import Check from '../icons/Check';
 import Mic from '../icons/Mic';
 import Clown from '../icons/Clown';
 
-const ChatMessage = ({source, message, memberId}) => {
+const ChatMessage = ({message, user}) => {
   return (
     <View style={styles.container}>
-      <Avatar source={source} size={48} style={styles.avatar} />
+      <Avatar source={user.image} size={48} style={styles.avatar} />
       <View style={styles.messageContainer}>
-        <StyledText bold>{memberId}</StyledText>
+        <StyledText style={{textAlign: 'left'}} bold>
+          {user.name}
+        </StyledText>
         <StyledText>{message}</StyledText>
         <View style={styles.iconsContainer}>
           <Check size={18} style={styles.icon} />
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
     paddingEnd: 12,
     borderRadius: 8,
     flex: 0.7,
+    textAlign: 'right',
   },
   iconsContainer: {
     flexDirection: 'row',

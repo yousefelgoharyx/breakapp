@@ -35,6 +35,7 @@ const Home = ({navigation}) => {
       navigation.navigate('Live', {
         voiceToken: voiceTokenMutation.data.data.token,
         channelName: channel.name,
+        channelId: channel.id,
       });
     }
   }, [voiceTokenMutation.isSuccess]);
@@ -46,8 +47,9 @@ const Home = ({navigation}) => {
     return <StyledText>Error</StyledText>;
   }
 
-  const handleJoinRoom = name => {
+  const handleJoinRoom = (name, id) => {
     channel.name = name;
+    channel.id = id;
     voiceTokenMutation.mutate({name, uid: user._id});
   };
 
@@ -87,7 +89,7 @@ const Home = ({navigation}) => {
               name={item.room_name}
               isPrivate={item.private}
               image={item.room_owner.avatar}
-              onPress={() => handleJoinRoom(item.room_name)}
+              onPress={() => handleJoinRoom(item.room_name, item._id)}
             />
           ))}
         </HomeRow>
